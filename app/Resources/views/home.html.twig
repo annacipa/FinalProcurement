@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{% block title %} Oferto.al {% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="apple-touch-icon">
+</head>
+<body >
+<div id="wrapper">
+{{ include ('nav.html.twig') }}
+<div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content" style="margin-bottom: 70px;">
+        <div class="container-fluid">
+
+                {% block header %}{% endblock %}
+          <!-- <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <a href=" {{app.request.headers.get('referer')}}"><h4><span class="lnr lnr-chevron-left"></span>Kthehu Mbrapa </h4></a>
+
+            </div> -->
+            {% block bodymain %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+
+<footer id="footer" style="width: 100%; background-color:#f4a950; height:60px;">
+
+    <div class="" style = "color: black ; vertical-align: center; text-align: center; padding-top:1%">
+        &copy; oferto.al All Rights Reserved
+    </div>
+</footer>
+</html>
+
+
+
+{{ include('styleandjs.html.twig') }}

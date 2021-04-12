@@ -1,0 +1,170 @@
+{% extends 'home.html.twig' %}
+{% block header%}
+    <h3 class="page-title">Buletini</h3>
+{% endblock %}
+
+{% block bodymain %}
+
+    <div class="row col-lg-offset-1 col-lg-10 Desktop ">
+        <table id="" class="element table table-condensed bse-col-collapse-add Desktop ">
+            <thead>
+            <tr>
+                <th  role="columnheader">#</th>
+                <th role="columnheader">Titull Thirrje</th>
+                <th role="columnheader">Biznesi</th>
+                <th role="columnheader">Fond Limit</th>
+                <th role="columnheader">Mbyllje Ofertimi</th>
+                <th role="columnheader">Fusha e Operimit</th>
+                <th role="columnheader"> Detaje</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tender in tenderat %}
+                <tr>
+                    <td>
+{#                        <b>#</b>  <br>#}
+
+                        {{ tender.id }}</td>
+                    <td>
+{#                        <b>Titull Thirrje</b> <br>#}
+                        {{ tender.titull_thirrje }}
+                    </td>
+                    <td>
+{#                        <b>Biznesi</b> <br>#}
+                        <a>{{ tender.emer_biznesi}} </a>
+                    </td>
+                    <td>
+{#                        <b>Fondi Limit</b> <br>#}
+                        {{ tender.fond_limit }}
+                    </td>
+                    <td>
+{#                        <b>Date Perfundimi</b><br>#}
+
+                        {{ tender.data_perfundimit|date('d-m-Y')  }}
+                    </td>
+                    <td>
+{#                        <b>Fushe Operimi</b> <br>#}
+                        {% if tender.emer_fushe_operimi == 'infrastrukture'%}
+                        <span class="label label-primary">
+                {% elseif  tender.emer_fushe_operimi == 'ndertim'%}
+                       <span class="label label-success">
+                       {% endif                       %}
+                           {{ tender.emer_fushe_operimi }} </span>
+                    </td>
+                    <td>
+                        <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
+                            <button type="button" class="btn btn-warning"><i class="fa fa-info-circle"></i> </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('oferto',{'id':tender.id }) }}">
+                            <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row  col-lg-10 col-lg-offset-1 mobileShow ">
+        <table id="" class=" element table  mobileShow ">
+            <thead>
+
+            <tr>
+                <th  role="columnheader">#</th>
+                <th role="columnheader">Titull Thirrje</th>
+                <th role="columnheader">Veprime</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody style="width: 100%;">
+            {% for tender in tenderat %}
+
+                <tr style="width: 100%">
+                    <td  colspan="1" style="width: 30%">
+                        <b>#</b>
+                        <br>
+                        {{ tender.id }}
+                        </td>
+                    <td colspan="4"  style="width: 50%">
+                        <b>Titull Thirrje</b> <br>
+                        {{ tender.titull_thirrje }}
+                    </td>
+
+                    <td colspan="5"  style="width: 30%">
+                        <b>Shiko</b><br>
+                        <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
+                            <button type="button" class="btn btn-warning"><i class="fa fa-info-circle"></i> </button>
+                        </a><br>
+                        <b>Oferto</b><br>
+                        <a href="{{ path('oferto',{'id':tender.id }) }}">
+                            <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
+                        </a>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+    <script>
+
+        $(document).ready( function () {
+
+            $('table.element').DataTable({
+                responsive: true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "pageLength": 20,
+                "paging": true,
+                "compact": true,
+               // "fieldSeparator":' \t',
+                language:{
+                    "sEmptyTable":     "Asnje rekord ne tabele",
+                    "sInfo":           "Duke treguar _START_ deri _END_ prej _TOTAL_ reshtave",
+                    "sInfoEmpty":      "Shfaqur  0 nga 0 rekorde",
+                    "sInfoFiltered":   "(filtruar  MAX nga rekordet totale)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ".",
+                    "sLengthMenu":     "Shfaq  MENU elemente",
+                    "sLoadingRecords": "Duke u ngarkuar...",
+                    "sProcessing":     "Duke procesuar...",
+                    "sSearch":         "Kerko:",
+                    "searchPlaceholder": "kerko",
+                    "sZeroRecords":    "0 rezultate nga kerkimi.",
+                    "oPaginate": {
+                        "sFirst":      "I pari",
+                        "sPrevious":   "<",
+                        "sNext":       ">",
+                        "sLast":       "i fundit"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": shtyp per te renditur ne rendin rrites",
+                        "sSortDescending": ": shtyp per te renditur ne rendin zbrites"
+                    }
+                },
+            });
+
+        } );
+        var header = document.getElementById("buletini");
+
+        header=header.classList.add('active');
+    </script>
+
+
+{% endblock %}

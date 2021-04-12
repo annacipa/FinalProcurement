@@ -1,0 +1,119 @@
+{% extends 'home.html.twig' %}
+{% block title %}View Tabela{% endblock %}
+{% block bodymain %}
+
+    <button  type="button" class="btn btn-warning"><a href="{{ path('tender_krijo') }}">KRIJO TENDER TE RI</button></a>
+    <h3>Tenderat Draft</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titulli i Thirrjes</th>
+            <th>Vlera e Fondit Limit</th>
+            <th>Modifiko</th>
+            <th>Publiko</th>
+            <th>Shiko</th>
+            <th>Fshi</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tender in tendersDraft %}
+            <tr>
+
+                <td>{{ tender.titullThirrje }}</td>
+                <td>{{ tender.fondLimit }}</td>
+                <td><button type="button" class="btn btn-outline-info"><a href="{{ path('tender_edit', {'id': tender.id}) }}">Modifiko</a></button></td>
+                <td><button type="button" class="btn btn-success"><a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">Publiko</a></button></td>
+                <td><button type="button" class="btn btn-light"><a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko Detaje</a></button></td>
+                <td><button><a href="">Shiko Detaje</a></button></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ <h3> Tenderat Aktiv</h3>
+    
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulli i Thirrjes</th>
+            <th>FondLimit</th>
+            <th>DataPerfundimit</th>
+            <th>EmerStatusi</th>
+            <th>Nr Ofertuesish</th>
+
+            {#           <th>BiznesIdId</th>#}
+            {#            <th>TenderId</th>#}
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tender in tendersAktiv %}
+            <tr>
+            <td>{{ tender.id }}</td>
+                <td>{{ tender.titullThirrje }}</td>
+                <td>{{ tender.fondLimit }}</td>
+                <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ tender.emerStatusi }}</td>
+                <td><button type="button" class="btn btn-outline-dark"> <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">Shiko {{ tender.nrAplikimesh }} Ofertat </a></button></td>
+                <td><button type="button" class="btn btn-outline-info"><a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">Modifiko</a></button></td>
+                <td><button type="button" class="btn btn-light"><a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko Detaje</a></button></td>
+                <td><button type="button" class="btn-outline-danger"> <a href="{{ path('tender_fshi', {'id': tender.id}) }}">Fshi</a></button></td>
+                <td><a href="{{ path('tender_mbyll', {'id': tender.id}) }}">Mbyll</a></td>
+                <td></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Tenderat Inaktiv</h3>
+    <table class="table">
+        <thead>
+        <tr>
+                        <th>Id</th>
+            <th>Titulli i Thirrjes</th>
+             <th>FondLimit</th>
+             <th>DataPerfundimit</th>
+             <th>EmerStatusi</th>
+             <th>Nr Aplikimesh</th>
+            {#           <th>BiznesIdId</th>#}
+            {#            <th>TenderId</th>#}
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tender in tenderInaktiv %}
+            <tr>
+                                <td>{{ tender.id }}</td>
+                <td>{{ tender.titullThirrje }}</td>
+                <td>{{ tender.fondLimit }}</td>
+                <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ tender.emerStatusi }}</td>
+                <td>{{ tender.nrAplikimesh }}</td>
+                <td> <a href="{{ path('tender_shiko', {'id': tender.id}) }}">Shiko</a></td>
+                <td><a href="{{ path('tender_fshi', {'id': tender.id}) }}">Fshi</a></td>
+                {#                <td>{{ tender.biznesIdId }}</td>#}
+                {#                <td>{{ tender.tenderId }}</td>#}
+                <td>
+                    {#                    <a href="{{ path('tender_show', {'id': tender.id}) }}">show</a>#}
+                    {#                    <a href="{{ path('tender_edit', {'id': tender.id}) }}">edit</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    <a href="{{ path('tender_new') }}">Create new</a>#}
+{% endblock %}
+

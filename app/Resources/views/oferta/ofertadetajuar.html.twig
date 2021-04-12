@@ -1,0 +1,42 @@
+{% extends 'home.html.twig' %}
+{% block header %}
+    <h3 class="page-title"> Oferta e Detajuar
+    </h3>
+{% endblock %}
+{% block bodymain %}
+<div class="panel modifiko  detaje">
+    {% for oferta in oferta %}
+    <table class="table">
+    <tbody>
+    <tr>
+        <th>Vlera e Ofertes </th>
+        <td>{{ oferta.VleraOferte }} </td>
+    </tr>
+    <tr>
+        <th>Pershkrimi </th>
+        <td>{{ oferta.Pershkrim }} </td>
+    </tr>
+    <tr>
+        <th> Adresa </th>
+        <td>{{ oferta.Adresa }} </td>
+    </tr>
+    <tr>
+
+        <th> Dokumenta</th>
+    </tr>
+        {% for dokument in dokumenta %}
+            </tr>
+         <th>   {{dokument.titullDokumenti|e }}</th>
+           <td> <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+               <button class="btn btn-success"> Shiko Dokumentin  </button></a>
+               </td>
+            </tr>
+        {% endfor %}
+
+    </tbody> {% endfor %}
+    </table>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

@@ -1,0 +1,445 @@
+{% extends 'home.html.twig' %}
+{% block header %}
+    <h2 class="page-title">Tenderat e mi</h2>
+{% endblock %}
+{% block bodymain %}
+    <a href="{{ path('tender_krijo') }}"> <button  type="button" class="btn btn-warning">KRIJO TENDER TE RI</button></a>
+   <div class=" col-lg-12 tenderatBox ">
+        <h3><i class="fa fa-circle" style="color: gray"></i> Tenderat Draft</h3>
+    <div class="col-lg-10 col-lg-offset-1 Desktop">
+        <table class="table element table-condensed bse-col-collapse-add Desktop">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Titull Thirrje</th>
+                <th>Vlera e Fondit Limit</th>
+                <th>Modifiko</th>
+                <th>Publiko</th>
+                <th>Shiko</th>
+                <th>Fshi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tender in tendersDraft %}
+                <tr>
+                    <td>
+{#                        <b>#</b><br>#}
+                        {{ tender.id }}</td>
+                    <td>
+{#                        <b>Titull Thirrje</b><br>#}
+                        {{ tender.titullThirrje }}</td>
+                    <td>{{ tender.fondLimit }}</td>
+                    <td>
+{#                        <b>Datë Përfundimi</b><br>#}
+                        <a href="{{ path('tender_edit', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+                    </td>
+                    <td>
+{#                        <b>Publiko</b><br>#}
+                        <a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
+                            <button type="button" class="btn btn-success"><i class="lnr lnr-location"></i></button></a>
+                    </td>
+                    <td>
+{#                        <b>Shiko</b><br>#}
+                        <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i></button></a>
+                    </td>
+                    <td>
+{#                        <b>Fshi</b><br>#}
+                        <a href="{{path('tender_fshi', {'id': tender.id}) }}">
+                            <button type="button" class="btn  btn-danger"><i class="lnr lnr-trash"></i></button></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td></td>
+                    <td colspan="15">Nuk keni asnjë tender draft</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{#   mobile#}
+
+       <div class="col-lg-12 mobileShow">
+           <table class="table element table-condensed bse-col-collapse-add mobileShow">
+               <thead>
+               <tr>
+                   <th>#</th>
+                   <th>Titull Thirrje</th>
+                   <th>Veprime</th>
+
+               </tr>
+               </thead>
+               <tbody>
+               {% for tender in tendersDraft %}
+                   <tr>
+                       <td>
+{#                           <b>#</b><br>#}
+                           {{ tender.id }}</td>
+                       <td>
+{#                           <b>Titull Thirrje</b><br>#}
+                           {{ tender.titullThirrje }}</td>
+                    <td>
+                           <a href="{{ path('tender_edit', {'id': tender.id}) }}">
+                               <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+
+                           <a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
+                               <button type="button" class="btn btn-success"><i class="lnr lnr-location"></i></button></a>
+
+                           <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                               <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i></button></a>
+
+                           <a href="{{path('tender_fshi', {'id': tender.id}) }}">
+                               <button type="button" class="btn  btn-danger"><i class="lnr lnr-trash"></i></button></a>
+                       </td>
+                   </tr>
+               {% else %}
+                   <tr>
+                       <td></td>
+                       <td colspan="15">Nuk keni asnjë tender draft</td>
+                       <td></td>
+
+
+                   </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+       </div>
+
+    </div>
+
+    <br>
+
+    <div class="  col-lg-12 tenderatBox " >
+        <h3> <i class="fa fa-circle" style="color: green"></i> Tenderat Aktiv</h3>
+        <div class="col-lg-10 col-lg-offset-1 Desktop">
+        <table class="table element table-condensed bse-col-collapse-add Desktop">
+
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Titull Thirrje</th>
+                <th>FondLimit</th>
+                <th>DataPerfundimit</th>
+                <th>Ofertat</th>
+                <th>Modifiko</th>
+                <th>Shiko</th>
+                <th>Fshi</th>
+                <th>Mbyll</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for tender in tendersAktiv %}
+                <tr>
+                    <td>
+{#                        <b>#</b><br>#}
+                        {{ tender.id }}
+                    </td>
+                    <td>
+{#                        <b>Titull Thirrje</b><br>#}
+                        {{ tender.titullThirrje }}
+                    </td>
+                    <td>
+{#                        <b>Fond Limit</b> <br>#}
+                        {{ tender.fondLimit }}
+                    </td>
+                    <td>
+{#                        <b>Data e Përfundimit</b><br>#}
+                        {{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+
+                    <td>
+{#                        <b>Ofertat</b><br>#}
+                        <button type="button" class="btn btn-outline-dark">
+                            <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                                {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button>
+                    </td>
+                    <td>
+{#                        <b>Modifiko</b><br>#}
+                        <a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+                    </td>
+                    <td>
+{#                        <b>Shiko</b><br>#}
+                        <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> </button></a>
+                    </td>
+                    <td>
+{#                        <b>Fshi</b><br>#}
+                        <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i> </button></a>
+                    </td>
+                    <td>
+{#                        <b>Mbyll</b><br>#}
+                        <a href="{{ path('tender_mbyll', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-warning"><i class="lnr lnr-cross"></i></button></a>
+                    </td>
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="15">Asnjë e dhenë</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+{#        MOBILE #}
+        <div class="col-lg-12 mobileShow">
+            <table class="table element table-condensed bse-col-collapse-add mobileShow">
+
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titull Thirrje</th>
+                    <th>Veprime</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for tender in tendersAktiv %}
+                    <tr>
+                        <td colspan="1">
+{#                            <b>#</b><br>#}
+                            {{ tender.id }}
+                        </td>
+                        <td colspan="4">
+{#                            <b>Titull Thirrje</b><br>#}
+                            {{ tender.titullThirrje }}
+                        </td>
+
+
+                        <td colspan="5">
+{#                            <b>Ofertat</b><br>#}
+                            <button type="button" class="btn btn-outline-dark">
+                                <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                                    {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button>
+{#                       <b>Modifiko</b><br>#}
+                            <a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+
+{#                            <b>Shiko</b><br>#}
+                            <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> </button></a>
+
+{#                            <b>Fshi</b><br>#}
+                            <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i> </button></a>
+
+{#                            <b>Mbyll</b><br>#}
+                            <a href="{{ path('tender_mbyll', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-warning"><i class="lnr lnr-cross"></i></button></a>
+                        </td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="15">Asnjë e dhenë</td>
+                        <td></td><td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<br>
+    <div class=" col-lg-12 tenderatBox">
+        <h3><i class="fa fa-circle" style="color: #8b0000"></i> Tenderat Inaktiv</h3>
+        <div class="col-lg-10 col-lg-offset-1 Desktop">
+        <table class="table element table-condensed bse-col-collapse-add Desktop">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>TitullThirrje</th>
+                <th>FondLimit</th>
+                <th>Data e Perfundimit</th>
+                <th>Ofertat</th>
+                <th>Shiko</th>
+                <th>Fshi</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tender in tenderInaktiv %}
+                <tr>
+                    <td>
+{#                        <b>#</b><br>#}
+                        {{ tender.id }}
+                    </td>
+                    <td>
+{#                        <b>Titull Thirrje</b><br>#}
+                        {{ tender.titullThirrje }}
+                    </td>
+                    <td>
+{#                        <b>Fond Limit</b><br>#}
+                        {{ tender.fondLimit }}
+                    </td>
+                    <td>
+{#                        <b>Datë Përfundimi</b><br>#}
+                        {{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}
+                    </td>
+
+                    <td>
+{#                        <b>Ofertat</b><br>#}
+                        <button type="button" class="btn btn-outline-dark">
+                            <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                                {{ tender.nrAplikimesh }}
+                                <i class="lnr lnr-inbox"></i>
+                            </a>
+                        </button>
+                    </td>
+                    <td>
+{#                        <b>Shiko</b><br>#}
+                        <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-info">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+{#                        <b>Fshi</b><br>#}
+                        <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                            <button type="button" class="btn btn-danger">
+                                <i class="lnr lnr-trash"></i>
+                            </button>
+                        </a>
+                    </td>
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="15">Asnjë e dhënë!!</td>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{#        Modbile Inaktiv#}
+        <div class="col-lg-12 mobileShow">
+            <table class="table element table-condensed bse-col-collapse-add mobileShow">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>TitullThirrje</th>
+                    <th>Veprime</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for tender in tenderInaktiv %}
+                    <tr>
+                        <td colspan="1">
+{#                            <b>#</b><br>#}
+                            {{ tender.id }}
+                        </td>
+                        <td colspan="4">
+{#                            <b>Titull Thirrje</b><br>#}
+                            {{ tender.titullThirrje }}
+                        </td>
+
+
+                        <td colspan="3">
+{#                            <b>Ofertat</b><br>#}
+                            <button type="button" class="btn btn-outline-dark">
+                                <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
+                                    {{ tender.nrAplikimesh }}
+                                    <i class="lnr lnr-inbox"></i>
+                                </a>
+                            </button>
+{#                       <b>Shiko</b><br>#}
+                            <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-info">
+                                    <i class="fa fa-info-circle"></i>
+                                </button>
+                            </a>
+{#                        <b>Fshi</b><br>#}
+                            <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
+                                <button type="button" class="btn btn-danger">
+                                    <i class="lnr lnr-trash"></i>
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="15">Asnjë tender inaktiv</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+
+        $(document).ready( function () {
+
+            $('table.element').DataTable({
+                responsive: true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "pageLength": 20,
+                "paging": true,
+                language:{
+                    "sEmptyTable":     "Asnje rekord ne tabele",
+                    "sInfo":           "Duke treguar _START_ deri _END_ prej _TOTAL_ reshtave",
+                    "sInfoEmpty":      "Shfaqur  0 nga 0 rekorde",
+                    "sInfoFiltered":   "(filtruar  MAX nga rekordet totale)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ".",
+                    "sLengthMenu":     "Shfaq  MENU elemente",
+                    "sLoadingRecords": "Duke u ngarkuar...",
+                    "sProcessing":     "Duke procesuar...",
+                    "sSearch":         "Kerko:",
+                    "sZeroRecords":    "0 rezultate nga kerkimi.",
+                    "oPaginate": {
+                        "sFirst":      "I pari",
+                        "sPrevious":   "Paraardhes",
+                        "sNext":       "Pasardhes",
+                        "sLast":       "i fundit"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": shtyp per te renditur ne rendin rrites",
+                        "sSortDescending": ": shtyp per te renditur ne rendin zbrites"
+                    }
+                },
+            });
+
+        } );
+
+
+        var header = document.getElementById("tenderat");
+
+        header=header.classList.add('active');
+
+
+    </script>
+
+{% endblock %}

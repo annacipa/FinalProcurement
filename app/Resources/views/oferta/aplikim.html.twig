@@ -1,0 +1,59 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block header %}
+  <h3 class="page-title">  Aplikim
+  </h3>
+{% endblock %}
+{% block bodymain %}
+    <div class="panel panel-headline detaje">
+        <div class="panel-heading">
+            <h3 class="panel-title" color="#f4a950"> Ju po aplikoni për tenderin:</h3>
+        </div>
+        <div class="panel-body titull">
+            <h4>{{ tender.titullThirrje }}</h4>
+                <table class="table">
+                    <tbody>
+
+                    {#    <tr>#}
+                    {#        <th>TitullThirrje</th>#}
+                    {#        <td>{{ tender.titullThirrje }}</td>#}
+                    {#    </tr>#}
+                    <tr>
+                        <th>Pershkrim</th>
+                        <td>{{ tender.pershkrim }}</td>
+                    </tr>
+                    <tr>
+                        <th>FondLimit</th>
+                        <td>{{ tender.fondLimit }}</td>
+                    </tr>
+                    <tr>
+                        <th>Biznesi Information</th>
+                        <td>Biznesi</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+    <hr>
+    <h3> Plotësoni formularin për të ofertuar. </h3>
+    <hr>
+    <div class="panel panel-headline detaje modifiko">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+
+    {#    <button class="btn">#}
+
+
+    {#        <a href="{{ path('tender_publiko_draft', {'id':) }}">Publiko</a>#}
+    {#    </button>#}
+
+    <button type="submit" class="btn btn-primary">
+        {{ button_label|default('Apliko') }}
+    </button>
+    {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

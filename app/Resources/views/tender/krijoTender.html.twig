@@ -1,0 +1,83 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block header %}
+<h3 class="page-title">Tender i ri</h3>
+{% endblock %}
+{% block bodymain %}
+
+<div class="panel modifiko">
+{{ form_start(form) }}
+ {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+   {{ form_end(form) }}
+
+
+    {% for dokument in dokumenta %}
+
+        <div id="dokId{{ dokument.id }}">
+            <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+                {{''~ dokument.titullDokumenti|e }} </a>
+            <button  class=" deleteBtn btn btn--danger btn-dark" id="{{ dokument.id }}" >Delete</button>
+        </div>
+    {% endfor %}
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    {{ parent() }}
+    <script src="{{ asset('js/popper.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+
+        $(document).ready(function(){
+
+            $('.deleteBtn').click(function (e) {
+                //
+                //
+                // e.preventDefault();
+                //
+
+              var itemId = $(this).attr('id');
+                delTodo(itemId);
+                function delTodo(itemId) {
+
+                    $.ajax({
+                        url: "/ajax_delete",
+                        method: "post",
+                      //  dataType: "json",
+                        data:{
+                            itemId: itemId
+                        }
+                    })
+                        .success(function (data) {
+
+                            if(data.message == true){
+
+                              $('#dokId'+itemId).addClass('d-none')
+                            }
+
+
+                    }).fail(function () {
+                        console.log(dokumentFshire)
+                alert('Could not be deleted');
+            });
+
+
+
+                }
+            })
+
+        });
+
+        var header = document.getElementById("krijoTender");
+        header=header.classList.add('active');
+    </script>
+{% endblock %}
+
+
+{% endblock %}
+

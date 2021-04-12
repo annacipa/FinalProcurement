@@ -1,0 +1,191 @@
+{% extends 'home.html.twig' %}
+{% block header %}
+    <h3>Ofertat e mia</h3>
+{% endblock %}
+{% block bodymain %}
+    <div class=" row col-lg-12  " >
+        <div class="Desktop">
+            <div class="col-lg-offset-1 col-lg-10">
+            <table class=" table element  table-condensed bse-col-collapse-add Desktop">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titulli i tenderit</th>
+                    <th>Vlera e Fondit Limit</th>
+                    <th>Data e mbylljes se Tenderit</th>
+                    <th>Statusi i Tenderit</th>
+                    <th>Vendimi</th>
+                    <th>Modifiko</th>
+                    <th>Shiko Oferten</th>
+                    <th>Fshi Oferten</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for oferta in oferta %}
+                    <tr>
+                        <td>
+{#                            <b>#</b><br>#}
+                            {{ oferta.ofertaId }}
+                        </td>
+                        <td>
+{#                            <b>Titulli i tenderit</b><br>#}
+                            {{ oferta.titullTender }}
+                        </td>
+                        <td>
+{#                            <b>Fond<br> Limit</b><br>#}
+                            {{ oferta.VleraOferte }}
+                        </td>
+                        <td>
+{#                            <b>Datë mbyllje</b><br>#}
+                            {{ oferta.dataMbylljeTender }}
+                        </td>
+                        <td>
+{#                            <b>Status</b><br>#}
+                            {% if oferta.statusTender == 'aktiv'%}
+                            <span class="label label-success">
+                  {% elseif  oferta.statusTender == 'mbyllur'%}
+                  <span class="label label-default">
+                  {% elseif  oferta.statusTender == 'inaktiv'%}
+                  <span class="label label-danger">
+                  {% endif %}
+                      {{ oferta.statusTender|upper }} </span>
+                        </td>
+                        <td>
+{#                            <b>Vendimi</b><br>#}
+                            {% if oferta.vendimi == 'fitues'%}
+                            <span class="label label-success">
+                  {% elseif  oferta.vendimi == 'shqyrtim'%}
+                  <span class="label label-default">
+                  {% endif %}
+                      {{ oferta.vendimi|upper }}</span>
+                        <td>
+{#                            <b>Modifiko</b><br>#}
+                            <a href="{{ path('Modifiko_Oferten', {'id': oferta.ofertaId}) }}">
+                                <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button>
+                            </a>
+                        </td>
+                        <td>
+{#                            <b>Shiko</b><br>#}
+                            <a href="{{ path('detaje_oferte', {'id': oferta.ofertaId}) }}">
+                                <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button>
+                            </a>
+                        </td>
+                        <td>
+{#                            <b>Fshij</b><br>#}
+                            <a href="{{ path('fshiOferten', {'id': oferta.ofertaId})}}">
+                                <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="15">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+        <!-- FOR MOBILE -->
+        <div class="mobileShow">
+            <table class=" table element  table-condensed bse-col-collapse-add mobileShow">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titull</th>
+                    <th>Vendimi</th>
+                    <th>Veprime</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for oferta in oferta %}
+                    <tr>
+                        <td>
+{#                            <b>#</b><br><br>#}
+                            {{ oferta.ofertaId }}
+                        </td>
+                        <td>
+{#                            <b>Titulli i tenderit</b><br>#}
+                            {{ oferta.titullTender }}
+                        </td>
+                        <td>
+{#                            <b>Vendimi</b><br>#}
+                            {% if oferta.vendimi == 'fitues'%}
+                            <span class="label label-success">
+                  {% elseif  oferta.vendimi == 'shqyrtim'%}
+                  <span class="label label-default">
+                  {% endif %}
+                      {{ oferta.vendimi|upper }}</span>
+                        <td>
+{#                            <b>Modifiko</b><br>#}
+                            <a href="{{ path('Modifiko_Oferten', {'id': oferta.ofertaId}) }}">
+                                <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button>
+                            </a><br>
+{#                            <b>Shiko</b><br>#}
+                            <a href="{{ path('detaje_oferte', {'id': oferta.ofertaId}) }}">
+                                <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button>
+                            </a><br>
+{#                            <b>Fshij</b><br>#}
+                            <a href="{{ path('fshiOferten', {'id': oferta.ofertaId})}}">
+                                <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="15">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready( function () {
+
+            $('table.element').DataTable({
+                responsive: true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "pageLength": 20,
+                "paging": true,
+                language:{
+                    "sEmptyTable":     "Asnje rekord ne tabele",
+                    "sInfo":           "Duke treguar _START_ deri _END_ prej _TOTAL_ reshtave",
+                    "sInfoEmpty":      "Shfaqur  0 nga 0 rekorde",
+                    "sInfoFiltered":   "(filtruar  MAX nga rekordet totale)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ".",
+                    "sLengthMenu":     "Shfaq  MENU elemente",
+                    "sLoadingRecords": "Duke u ngarkuar...",
+                    "sProcessing":     "Duke procesuar...",
+                    "sSearch":         "Kerkoni:",
+                    "searchPlaceholder": "kerko",
+                    "sZeroRecords":    "0 rezultate nga kerkimi.",
+                    "oPaginate": {
+                        "sFirst":      "I pari",
+                        "sPrevious":   "Paraardhes",
+                        "sNext":       "Pasardhes",
+                        "sLast":       "i fundit"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": shtyp per te renditur ne rendin rrites",
+                        "sSortDescending": ": shtyp per te renditur ne rendin zbrites"
+                    }
+                },
+            });
+
+        } );
+        var header = document.getElementById("ofertat");
+
+        header=header.classList.add('active');
+    </script>
+{% endblock %}

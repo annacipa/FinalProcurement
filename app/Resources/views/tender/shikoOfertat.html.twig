@@ -1,0 +1,94 @@
+{% extends 'home.html.twig' %}
+{% block header %}
+    <h3 class="page-title"> Ofertat e mia</h3>
+{% endblock %}
+{% block bodymain %}
+    <h2> Tenderi:</h2>
+<div class="panel modifiko">
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>TitullThirrje</th>
+        <td>{{ tender.titullThirrje }}</td>
+    </tr>
+    <tr>
+        <th>Pershkrim</th>
+        <td>{{ tender.pershkrim }}</td>
+    </tr>
+    <tr>
+        <th>FondLimit</th>
+        <td>{{ tender.fondLimit }}</td>
+    </tr>
+    <tr>
+        <th>AdresaDorezimit</th>
+        <td>{{ tender.adresaDorezimit }}</td>
+    </tr>
+
+    <tr>
+        <th>DataPerfundimit</th>
+        <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+    </tr>
+    <tr>
+        <th>Licenca</th>
+        <td>{{ tender.licenca }}</td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+</div>
+<h2>Ofertat</h2>
+        <div class="col-lg-offset-1 col-lg-10 ">
+<table class="table element Desktop">
+    <thead>
+    <tr>
+        <th>Pershkrim</th>
+        <th>Vlera e Fondit Limit</th>
+        <th>Adresa e Dorezimit</th>
+        <th>Biznesi</th>
+        <th>Vendimi</th>
+        <th>Shiko Detaje Oferte</th>
+        <th>aktivitet</th>
+
+    </tr>
+    </thead>
+    <tbody>
+{% for oferta in ofertat %}
+    <tr>
+
+        <td>{{ oferta.OfertaPershkrim }}</td>
+        <td>{{ oferta.vlefta }}</td>
+        <td>{{ oferta.adresa_dorezimit }}</td>
+        <td>{{ oferta.emer_biznesi }}</td>
+        <td>{{ oferta.vendimi }}</td>
+        <td><a href="{{ path('detaje_oferte', {'id': oferta.OfertaId}) }}"><button type="button" class="btn btn-secondary">
+                Shiko Detajet e Ofertes</button></a>
+        <td><a href="{{ path('shpall_fitues',{'id':oferta.OfertaId,'idTender':tender.Id}) }}"><button type="button" class="btn btn-success">Shpall Fitues</button></A></td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="15">no records found</td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+        </div>
+
+
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+
+        $(document).ready( function () {
+
+            $('table.element').DataTable({
+                responsive: true
+            });
+
+        } );
+
+
+    </script>
+    {% endblock %}

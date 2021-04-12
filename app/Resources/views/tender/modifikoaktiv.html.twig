@@ -1,0 +1,40 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+
+{% block header %}<h3 class="page-title">Modifikim Tenderi Aktiv</h3>{% endblock %}
+
+{% block bodymain %}
+    <div class="panel modifiko detaje">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <i class="fa fa-info-circle"></i> Tenderi juaj eshte aktiv! Ju mund te ndryshoni vetem daten e perfundimit
+        </div>
+
+        <div class="d-flex flex-row">
+            <div class="">
+                <h4 class="col-form-label required"><b>Tenderi që po modifikoni: </b></h4>
+            </div>
+            <div class="float-right">{{ tender.titullThirrje }}</div>
+            <div class="float-right">{{ tender.pershkrim }}</div>
+
+        </div>
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-group-toggle">
+        {{ button_label|default('Perditeso') }}
+    </button>
+
+    {{ form_end(form) }}
+
+
+</div>
+    <script>
+    var header = document.getElementById("tenderat");
+
+    header=header.classList.add('active');
+    </script>
+
+{% endblock %}

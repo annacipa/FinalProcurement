@@ -1,0 +1,35 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+{% for dokument in dokumenta %}
+
+<div>
+    {{''~ dokument.titullDokumenti|e }}<
+<button class="btn" onclick="deleteAction({{ dokument.id }})" >Delete</button>
+</div>
+    {% endfor %}
+
+
+    <script>
+        function deleteAction(dokumentId) {
+            $.ajax({
+                url: "/ajax_delete",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "dokumentFshire": dokumentId
+                },
+                async: true,
+                success: function (data)
+                {
+                    console.log(data)
+                }
+            })
+
+        }
+        var header = document.getElementById("krijoTender");
+        header=header.classList.add('active');
+
+        </script>

@@ -1,0 +1,63 @@
+{% extends 'home.html.twig' %}
+{% block header %}
+    <h3 class="page-title">  Detaje Tenderi</h3>
+{% endblock %}
+
+{% block bodymain %}
+<div class=" panel modifiko detaje d-flex justify-content-center">
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>TitullThirrje</th>
+            <td>{{ tender.titullThirrje }}</td>
+        </tr>
+        <tr>
+            <th>Pershkrim</th>
+            <td>{{ tender.pershkrim }}</td>
+        </tr>
+        <tr>
+            <th>FondLimit</th>
+            <td>{{ tender.fondLimit }}</td>
+        </tr>
+        <tr>
+            <th>AdresaDorezimit</th>
+            <td>{{ tender.adresaDorezimit }}</td>
+        </tr>
+
+        <tr>
+            <th>DataPerfundimit</th>
+            <td>{{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Licenca</th>
+            <td>{{ tender.licenca }}</td>
+        </tr>
+        <tr>
+            <th>Fushe Operimi</th>
+            <td>{{ fusheOperimi }}</td>
+        </tr>
+        <tr>
+            <th>Dokumenta</th>
+        </tr>
+
+
+    {% for dokument in dokumenta %}
+        </tr>
+        <th>   {{dokument.titullDokumenti|e }}</th>
+        <td> <a href="{{ asset('uploads/' ~ dokument.titullDokumenti) }}">
+                <button class="btn btn-success"> Shiko Dokumentin  </button></a>
+        </td>
+        </tr>
+    {% else %}
+    <tr>
+        <td colspan="15">Nuk ka dokumenta</td>
+    </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('oferto',{'id':tender.id }) }}" style="float:right">
+      <button class="btn btn-warning">  <span class="icon "><i class="lnr lnr-select">Apliko</i></span></button></a>
+</div>
+
+{% endblock %}

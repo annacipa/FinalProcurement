@@ -1,0 +1,60 @@
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="brand">
+            <a href="{{  path('buletini')}}">
+                <img src="{{ asset('assets/img/LogoHorizontal.png') }}" alt="Logo" class="img-responsive logo" >
+            </a>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-menu"></i></button>
+            </div>
+{#            <form class="navbar-form navbar-left">#}
+
+{#            </form>#}
+
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src={{ logoUrl }} class="img-circle" alt="Avatar">
+                            <span id="BiznesName">{{ biznesName }}</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('profili')}}"><i class="lnr lnr-user"></i> <span>Profili im</span></a></li>
+
+                            <li><a href="{{ path('logout')}}"><i class="lnr lnr-exit"></i> <span>Dil</span></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+
+                <ul class="nav">
+
+                   <li> <a href="{{ path('tender_krijo') }}"  id="krijoTender"> <i class="fa fa-bullhorn"></i> Krijo tender të ri</a></li>
+
+                    <li><a href="{{  path('buletini')}}"  id="buletini"><i class="lnr lnr-home"></i> <span>Buletini</span></a></li>
+                    <li><a href="{{ path('tender_view') }}" id="tenderat"><i class="lnr lnr-dice"></i> <span>Tenderat e mi</span></a></li>
+                    <li><a href="{{ path('ofertat_e_mia') }}" id="ofertat" class=""><i class="lnr lnr-book"></i> <span>Ofertat e mia</span></a></li>
+                    <li> <a href="{{ path('profili')}}" id="profil"><i class="lnr lnr-user"></i> <span>Profili im</span></a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <footer>
+
+        <div class="container-fluid">
+
+        </div>
+    </footer>
+

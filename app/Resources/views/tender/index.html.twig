@@ -1,0 +1,19 @@
+{% extends 'home.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block bodymain %}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+
+    <button type="submit" class="btn btn-primary">
+        {{ button_label|default('Ruaj') }}
+    </button>
+{{ form_end(form) }}
+
+<script>
+    var header = document.getElementById("krijoTender");
+    header=header.classList.add('active');
+</script>
+
+{% endblock %}
