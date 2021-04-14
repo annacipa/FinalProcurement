@@ -2019,12 +2019,12 @@ table.dataTable tfoot th {
   font-weight: bold;
 }
 table.dataTable.Desktop  td:first-child{
-  padding-left:20px;
+  /*padding-left:20px;*/
   /*border-top-left-radius: 18px;*/
   /*border-bottom-left-radius:18px;*/
 }
 table.dataTable.mobileShow  td:first-child{
-  padding-left:20px;
+  /*padding-left:20px;*/
   /*border-top-left-radius: 18px;*/
   /*border-bottom-left-radius:18px;*/
 }

@@ -86,13 +86,16 @@
 
                 <tr style="width: 100%">
                     <td  colspan="1" style="width: 30%">
-                        <b>#</b>
+{#                        <b>#</b>#}
                         <br>
                         {{ tender.id }}
+                        <span>|</span>
                         </td>
                     <td colspan="4"  style="width: 50%">
                         <b>Titull Thirrje</b> <br>
                         {{ tender.titull_thirrje }}
+                       
+                        <span>|</span>
                     </td>
 
                     <td colspan="5"  style="width: 30%">
@@ -100,10 +103,12 @@
                         <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
                             <button type="button" class="btn btn-warning"><i class="fa fa-info-circle"></i> </button>
                         </a><br>
+
                         <b>Oferto</b><br>
                         <a href="{{ path('oferto',{'id':tender.id }) }}">
                             <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
                         </a>
+
                     </td>
 
                 </tr>

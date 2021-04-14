@@ -16,7 +16,9 @@ class TenderAktivType extends AbstractType
     {
         $builder
 
-            ->add('dataPerfundimit',DateTimeType::class);
+            ->add('dataPerfundimit',DateTimeType::class,array(
+                'data' => new \DateTime()
+            ));
 
     }
 //        public function configureOptions(OptionsResolver $resolver)

@@ -20,9 +20,11 @@
                         {% endfor %}
                         {{ form_start(form) }}
                             <div class="input-group">
+
                                 <label for="signin-email" class="control-label sr-only">NIPT</label>
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT'}})}}
+                                {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'5'}})}}
+                          
                             </div>
                     <br>
                             <div class="input-group">
@@ -58,3 +60,24 @@
     </div>
     {{ include('footer.html.twig') }}
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        var regex = /^[A-Za-z]+$/;
+
+        // document.getElementsByClassName("btn").onclick=function () {
+
+
+        if(regex.test(document.getElementById("login_admin_username").value)) {
+            document.getElementById("demo").innerHTML = "Paragraph changed!";
+            // console.log(document.getElementById("username_id").value);
+            // alert('Valid NIPT number');
+        }
+           else
+        {
+            // alert('Invalid NIPT number');
+        }
+
+
+</script>

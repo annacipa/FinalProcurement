@@ -24,11 +24,19 @@
                 <tr>
                     <td>
 {#                        <b>#</b><br>#}
-                        {{ tender.id }}</td>
+                        {{ tender.id }}
+                        <span style="float:right">|</span>
+                    </td>
+                    <span style="float:right">|</span>
                     <td>
 {#                        <b>Titull Thirrje</b><br>#}
-                        {{ tender.titullThirrje }}</td>
-                    <td>{{ tender.fondLimit }}</td>
+                        {{ tender.titullThirrje }}
+                        <span style="float:right">|</span>
+                    </td>
+                    <td>{{ tender.fondLimit }}
+                        <span style="float:right">|</span>
+                    </td>
+
                     <td>
 {#                        <b>Datë Përfundimi</b><br>#}
                         <a href="{{ path('tender_edit', {'id': tender.id}) }}">
@@ -142,29 +150,36 @@
                     <td>
 {#                        <b>#</b><br>#}
                         {{ tender.id }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Titull Thirrje</b><br>#}
                         {{ tender.titullThirrje }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Fond Limit</b> <br>#}
                         {{ tender.fondLimit }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Data e Përfundimit</b><br>#}
                         {{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}</td>
+
 
                     <td>
 {#                        <b>Ofertat</b><br>#}
                         <button type="button" class="btn btn-outline-dark">
                             <a href="{{ path('shiko_ofertat_tender_aktiv', {'id': tender.id}) }}">
                                 {{ tender.nrAplikimesh }} <i class="lnr lnr-inbox"></i></a></button>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Modifiko</b><br>#}
                         <a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+{#                        <span style="float:right;    padding-top: 7%;">|</span>#}
+
                     </td>
                     <td>
 {#                        <b>Shiko</b><br>#}
@@ -219,10 +234,12 @@
                         <td colspan="1">
 {#                            <b>#</b><br>#}
                             {{ tender.id }}
+                            <span style="float:right">|</span>
                         </td>
                         <td colspan="4">
 {#                            <b>Titull Thirrje</b><br>#}
                             {{ tender.titullThirrje }}
+                            <span style="float:right">|</span>
                         </td>
 
 
@@ -282,18 +299,22 @@
                     <td>
 {#                        <b>#</b><br>#}
                         {{ tender.id }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Titull Thirrje</b><br>#}
                         {{ tender.titullThirrje }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Fond Limit</b><br>#}
                         {{ tender.fondLimit }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Datë Përfundimi</b><br>#}
                         {{ tender.dataPerfundimit ? tender.dataPerfundimit|date('Y-m-d H:i:s') : '' }}
+                        <span style="float:right">|</span>
                     </td>
 
                     <td>
@@ -417,7 +438,8 @@
                     "sLengthMenu":     "Shfaq  MENU elemente",
                     "sLoadingRecords": "Duke u ngarkuar...",
                     "sProcessing":     "Duke procesuar...",
-                    "sSearch":         "Kerko:",
+                    "sSearch":         "",
+                    "searchPlaceholder": "Kerko",
                     "sZeroRecords":    "0 rezultate nga kerkimi.",
                     "oPaginate": {
                         "sFirst":      "I pari",

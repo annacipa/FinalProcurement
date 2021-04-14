@@ -27,7 +27,9 @@ class TenderType extends AbstractType
             ->add('fondLimit',IntegerType::class)
             ->add('adresaDorezimit',TextType::class)
 
-            ->add('dataPerfundimit',DateTimeType::class)
+            ->add('dataPerfundimit',DateTimeType::class,array(
+                'data' => new \DateTime()
+            ))
             ->add('licenca',TextType::class)
 //            ->add('isDeleted')
 //            ->add('createdBy')
