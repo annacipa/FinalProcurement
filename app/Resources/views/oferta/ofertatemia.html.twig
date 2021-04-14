@@ -26,18 +26,22 @@
                         <td>
 {#                            <b>#</b><br>#}
                             {{ oferta.ofertaId }}
+                            <span style="float:right">|</span>
                         </td>
                         <td>
 {#                            <b>Titulli i tenderit</b><br>#}
                             {{ oferta.titullTender }}
+                            <span style="float:right">|</span>
                         </td>
                         <td>
 {#                            <b>Fond<br> Limit</b><br>#}
                             {{ oferta.VleraOferte }}
+                            <span style="float:right">|</span>
                         </td>
                         <td>
 {#                            <b>Datë mbyllje</b><br>#}
                             {{ oferta.dataMbylljeTender }}
+                            <span style="float:right">|</span>
                         </td>
                         <td>
 {#                            <b>Status</b><br>#}
@@ -49,6 +53,7 @@
                   <span class="label label-danger">
                   {% endif %}
                       {{ oferta.statusTender|upper }} </span>
+                       <span style="float:right">|</span>
                         </td>
                         <td>
 {#                            <b>Vendimi</b><br>#}
@@ -58,17 +63,20 @@
                   <span class="label label-default">
                   {% endif %}
                       {{ oferta.vendimi|upper }}</span>
+                         <span style="float:right">|</span>
                         <td>
 {#                            <b>Modifiko</b><br>#}
                             <a href="{{ path('Modifiko_Oferten', {'id': oferta.ofertaId}) }}">
                                 <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button>
                             </a>
+                            <span style="float:right;    padding-top: 7%;">|</span>
                         </td>
                         <td>
 {#                            <b>Shiko</b><br>#}
                             <a href="{{ path('detaje_oferte', {'id': oferta.ofertaId}) }}">
                                 <button type="button" class="btn btn-info"><i class="lnr  lnr-text-align-justify"></i> </button>
                             </a>
+                            <span style="float:right;    padding-top: 7%;">|</span>
                         </td>
                         <td>
 {#                            <b>Fshij</b><br>#}
@@ -76,6 +84,7 @@
                                 <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i>
                                 </button>
                             </a>
+
                         </td>
                     </tr>
                 {% else %}

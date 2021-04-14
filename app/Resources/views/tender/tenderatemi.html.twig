@@ -41,16 +41,19 @@
 {#                        <b>Datë Përfundimi</b><br>#}
                         <a href="{{ path('tender_edit', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Publiko</b><br>#}
                         <a href="{{ path('tender_publiko_draft',{ 'id': tender.id}) }}">
                             <button type="button" class="btn btn-success"><i class="lnr lnr-location"></i></button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Shiko</b><br>#}
                         <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i></button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Fshi</b><br>#}
@@ -178,6 +181,7 @@
 {#                        <b>Modifiko</b><br>#}
                         <a href="{{ path('tender_modifiko_aktiv', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-default"><i class="lnr lnr-pencil"></i></button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
 {#                        <span style="float:right;    padding-top: 7%;">|</span>#}
 
                     </td>
@@ -185,11 +189,13 @@
 {#                        <b>Shiko</b><br>#}
                         <a href="{{ path('tender_shiko', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-info"><i class="fa fa-info-circle"></i> </button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Fshi</b><br>#}
                         <a href="{{ path('tender_fshi', {'id': tender.id}) }}">
                             <button type="button" class="btn btn-danger"><i class="lnr lnr-trash"></i> </button></a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Mbyll</b><br>#}
@@ -325,6 +331,7 @@
                                 <i class="lnr lnr-inbox"></i>
                             </a>
                         </button>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
 {#                        <b>Shiko</b><br>#}
@@ -332,6 +339,7 @@
                             <button type="button" class="btn btn-info">
                                 <i class="fa fa-info-circle"></i>
                             </button>
+                            <span style="float:right;    padding-top: 7%; color: black">|</span>
                         </a>
                     </td>
                     <td>

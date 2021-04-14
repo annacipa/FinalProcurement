@@ -16,6 +16,7 @@
                 <th role="columnheader">Mbyllje Ofertimi</th>
                 <th role="columnheader">Fusha e Operimit</th>
                 <th role="columnheader"> Detaje</th>
+                <th role="columnheader"> Apliko</th>
                 <th></th>
             </tr>
             </thead>
@@ -25,23 +26,29 @@
                     <td>
 {#                        <b>#</b>  <br>#}
 
-                        {{ tender.id }}</td>
+                        {{ tender.id }}
+                        <span style="float:right">|</span>
+                    </td>
                     <td>
 {#                        <b>Titull Thirrje</b> <br>#}
                         {{ tender.titull_thirrje }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Biznesi</b> <br>#}
                         <a>{{ tender.emer_biznesi}} </a>
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Fondi Limit</b> <br>#}
                         {{ tender.fond_limit }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Date Perfundimi</b><br>#}
 
                         {{ tender.data_perfundimit|date('d-m-Y')  }}
+                        <span style="float:right">|</span>
                     </td>
                     <td>
 {#                        <b>Fushe Operimi</b> <br>#}
@@ -49,18 +56,21 @@
                         <span class="label label-primary">
                 {% elseif  tender.emer_fushe_operimi == 'ndertim'%}
                        <span class="label label-success">
-                       {% endif                       %}
+                       {% endif                    %}
                            {{ tender.emer_fushe_operimi }} </span>
+                             <span style="float:right">|</span>
                     </td>
                     <td>
                         <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
                             <button type="button" class="btn btn-warning"><i class="fa fa-info-circle"></i> </button>
                         </a>
+                        <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
                     <td>
                         <a href="{{ path('oferto',{'id':tender.id }) }}">
                             <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
                         </a>
+
                     </td>
                 </tr>
             {% endfor %}
@@ -149,8 +159,8 @@
                     "sLengthMenu":     "Shfaq  MENU elemente",
                     "sLoadingRecords": "Duke u ngarkuar...",
                     "sProcessing":     "Duke procesuar...",
-                    "sSearch":         "Kerko:",
-                    "searchPlaceholder": "kerko",
+                    "sSearch":         " ",
+                    "searchPlaceholder": "Kerko",
                     "sZeroRecords":    "0 rezultate nga kerkimi.",
                     "oPaginate": {
                         "sFirst":      "I pari",
