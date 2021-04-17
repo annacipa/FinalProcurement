@@ -1,16 +1,16 @@
-
+{{ include ('nav.html.twig') }}
 {{ include ('styleandjs.html.twig') }}
 
-<div id="wrapper" style="height:1.1vh">
+<div id="wrapper" style="height:100%">
     <div class="vertical-align-wrap">
         <div class="vertical-align-middle">
             <div class="auth-box " style="margin-bottom: 3%">
                 <div class="left">
                     <div class="content">
                         <div class="header">
-                            <div class="logo text-center">
-                                <a href="{{  path('landingpage')}}"><img src="assets/img/Logo.png" alt="Logo" width="120px">
-                                </a></div>
+{#                            <div class="logo text-center">#}
+{#                                <a href="{{  path('landingpage')}}"><img src="assets/img/Logo.png" alt="Logo" width="120px">#}
+{#                                </a></div>#}
                             <p class="lead">Identifikohuni në sistem</p>
                         </div>
                         {% for msg in app.flashes('error') %}
@@ -38,11 +38,15 @@
                                 'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
                         {{ form_end(form) }}
                             <div class="bottom">
-                              <p class="lead">  <span class="helper-text"><i class="fa fa-lock"></i> <a href="#" style="color:#FFC107">Keni harruar fjalekalimin?</a></span></p>
+                              <p class="lead">  <span class="helper-text">
+                                      <i class="fa fa-lock"></i>
+                                      <a href="#" style="color:#FFC107">Keni harruar fjalekalimin?</a></span></p>
                             </div><br>
                             <div  class="d-flex justify-content-center">
 
-                                <p class="lead"> <i class="fa fa-user-plus"></i>  <a href="{{ path('regjistohu') }}" style="color:#FFC107"> Regjistrohuni  ne Sistem</a></p>
+                                <p class="lead"> <i class="fa fa-user-plus"></i>
+                                    <a href="{{ path('regjistohu') }}" style="color:#FFC107"> Regjistrohuni  ne Sistem</a>
+                                </p>
                             </div>
 
                     </div>

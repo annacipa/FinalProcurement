@@ -1,60 +1,64 @@
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="brand">
-            <a href="{{  path('buletini')}}">
-                <img src="{{ asset('assets/img/LogoHorizontal.png') }}" alt="Logo" class="img-responsive logo" >
-            </a>
-        </div>
-        <div class="container-fluid">
-            <div class="navbar-btn">
-                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-menu"></i></button>
-            </div>
-{#            <form class="navbar-form navbar-left">#}
+    <title>Oferto.al</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-{#            </form>#}
+    <!-- Favicons -->
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/apple-icon-180x180.png') }}" rel="apple-touch-icon">
 
-            <div id="navbar-menu">
-                <ul class="nav navbar-nav navbar-right">
-                                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src={{ logoUrl }} class="img-circle" alt="Avatar">
-                            <span id="BiznesName">{{ biznesName }}</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('profili')}}"><i class="lnr lnr-user"></i> <span>Profili im</span></a></li>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
 
-                            <li><a href="{{ path('logout')}}"><i class="lnr lnr-exit"></i> <span>Dil</span></a></li>
-                        </ul>
-                    </li>
+    <!-- Vendor CSS Files -->
+    <link href="assets/butterflybootstrap/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/butterflybootstrap/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="assets/butterflybootstrap/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/butterflybootstrap/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="assets/butterflybootstrap/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link href="assets/butterflybootstrap/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- Template Main CSS File -->
+    <link href="assets/butterflybootstrap/assets/css/style.css" rel="stylesheet">
+</head>
 
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- END NAVBAR -->
-    <!-- LEFT SIDEBAR -->
-    <div id="sidebar-nav" class="sidebar">
-        <div class="sidebar-scroll">
-            <nav>
+<header id="header" class="fixed-top">
 
-                <ul class="nav">
+    <div class="container d-flex align-items-center">
+        <a href="{{ path('landingpage') }}" class="logo mr-auto"><img src="{{ asset('assets/img/LogoHorizontal.png') }}" alt="" class="img-fluid img-responsive"  ></a>
+        <nav class="nav-menu mobileNav">
+            <ul>
+                <li><a href="{{ path('regjistohu') }}"><i class="fa fa-user-plus"></i></a></li>
+            </ul>
+        </nav>
+        <nav class="nav-menu d-none d-lg-block" id="#sideNav">
 
-                   <li> <a href="{{ path('tender_krijo') }}"  id="krijoTender"> <i class="fa fa-bullhorn"></i> Krijo tender të ri</a></li>
+            <ul>
 
-                    <li><a href="{{  path('buletini')}}"  id="buletini"><i class="lnr lnr-home"></i> <span>Buletini</span></a></li>
-                    <li><a href="{{ path('tender_view') }}" id="tenderat"><i class="lnr lnr-dice"></i> <span>Tenderat e mi</span></a></li>
-                    <li><a href="{{ path('ofertat_e_mia') }}" id="ofertat" class=""><i class="lnr lnr-book"></i> <span>Ofertat e mia</span></a></li>
-                    <li> <a href="{{ path('profili')}}" id="profil"><i class="lnr lnr-user"></i> <span>Profili im</span></a></li>
 
-                </ul>
-            </nav>
-        </div>
+                <li><a href="{{ path('identifikohu') }}">Identifikohu</a></li>
+                <li><a href="{{ path('regjistohu') }}">Regjistrohu</a></li>
+
+                <li><a> <i class="icofont-facebook" style="color:#f4a950"></i></a></li>
+                <li><a> <i class="icofont-instagram" style="color:#f4a950"></i></a></li>
+                <li><a><i class="icofont-linkedin" style="color:#f4a950"></i></a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
     </div>
+</header>
 
-
-    <footer>
-
-        <div class="container-fluid">
-
-        </div>
-    </footer>
-
+<script src="assets/butterflybootstrap/assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/venobox/venobox.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/counterup/counterup.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/butterflybootstrap/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<!-- Template Main JS File -->
+<script src="assets/butterflybootstrap/assets/js/main.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
