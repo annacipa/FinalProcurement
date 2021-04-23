@@ -56,8 +56,10 @@
     {% endfor %}
         </tbody>
     </table>
+    {% if tender.biznesId != biznesId %}
     <a href="{{ path('oferto',{'id':tender.id }) }}" style="float:right">
       <button class="btn btn-warning">  <span class="icon "><i class="lnr lnr-select">Apliko</i></span></button></a>
+      {% endif %}
 </div>
 
 {% endblock %}

@@ -45,7 +45,7 @@ class DefaultController extends Controller
             else{
                 $this->addFlash('error', 'Keni vendosur fjalekalimin ose NIPT gabim! Ju lutem provojeni sërish!!');
                 return $this->redirectToRoute('identifikohu');
-//             return $this->redirectToRoute('landingpage');
+
             }
         }
         return $this->render('login.html.twig', [

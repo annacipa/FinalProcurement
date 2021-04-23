@@ -9,7 +9,9 @@ use AppBundle\Entity\Role;
 use AppBundle\Form\BiznesType;
 use AppBundle\Form\LoginAdminType;
 use AppBundle\Form\OfertaType;
+use AppBundle\Form\BiznesModifikoType;
 use AppBundle\Form\UserRegisterType;
+use AppBundle\Form\NdryshoPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,12 +94,7 @@ class BiznesController extends Controller
         if(($this->get('session')->get('loginUserId') != null) ){
 
             $biznesId=$this->get('session')->get('loginUserId');
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
-            $logo=  $this->get('session')->get('logoPath');
-
-
-            $Query="SELECT emer_biznesi , 
+            $Query="SELECT emer_biznesi , logo,
                     email as email, 
                     nipt as nipt, 
                     adresa, logo, numer_telefoni, 
@@ -111,11 +108,11 @@ class BiznesController extends Controller
             $statement->execute(array('biznesID'=>$biznesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
+            $logopath="/uploads/logo/".$profili[0]['logo'];
             return $this->render('profili.html.twig', [
                 'profili' => $profili[0],
                 'logoUrl'=>$logopath,
-                'logo'=>$logo,
+                'logo'=>$profili[0]['logo'],
                 'biznesId'=>$biznesId,
                 'biznesName'=>$biznesName
             ]);
@@ -132,59 +129,57 @@ class BiznesController extends Controller
         if(($this->get('session')->get('loginUserId') != null) ){
 
             $biznesId=$this->get('session')->get('loginUserId');
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
-            $logo=  $this->get('session')->get('logoPath');
-
-            $Query="SELECT emer_biznesi 
+      
+            $Query="SELECT emer_biznesi, logo 
                     From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
             $statement->execute(array('biznesID'=>$biznesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
+            $logo = $profili[0]['logo'];
+            $logopath="/uploads/logo/".$logo;
+             $biznes->setLogo('');
+            $form = $this->createForm(BiznesModifikoType::class, $biznes);
 
-            $biznes->setLogo('');
-            $form = $this->createForm(BiznesType::class, $biznes);
             $form->handleRequest($request);
-            $form->get('password')->getData();
+           
             if($form->isSubmitted() && $form->isValid()) {
-
-                $logo = $form->get('logo')->getData();
-
-                $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = $originalFilename.'-'.uniqid().'.'.$logo->guessExtension();
-                $logo->move($this->getParameter('logo_directory'), $newFilename);
-
+               
+                             
                 $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
-
                 $entityManager = $this->getDoctrine()->getManager();
-//                dump($biznes);die();
                 $biznes->setEmerBiznesi($form->getData()->getEmerBiznesi());
                 $biznes->setRoleId(3);
                 $biznes->setEmail($form->getData()->getEmail());
-                $biznes->setNipt($form->getData()->getNipt());
                 $biznes->setAdresa($form->getData()->getAdresa());
-                $biznes->setLogo($newFilename);
+                $logo = $form->get('logo')->getData();  
+                 if($logo != null){
+                   
+                    $originalFilename = pathinfo($logo->getClientOriginalName(), PATHINFO_FILENAME);
+                    $newFilename = $originalFilename.'-'.uniqid().'.'.$logo->guessExtension();
+                    $logo->move($this->getParameter('logo_directory'), $newFilename);
+                    $biznes->setLogo($newFilename);
+                    
+                }
+                else{
+                   $logo = $logopath;
+                   $biznes->setLogo($profili[0]['logo']);
+                }
                 $biznes->setNumerTelefoni($form->getData()->getNumerTelefoni());
-                $biznes->setPassword(base64_encode($form->getData()->getPassword()));
-                $biznes->setAktiv(0);
+                $biznes->setAktiv(1);
                 $biznes->setIsDeleted(0);
                 $biznes->setPaguar(1);
                 $biznes->setFusheOperimiId($form->get('fushe_operimi_id')->getData()->getId());
-//                dump($biznes);die();
                 $entityManager->persist($biznes);
                 $entityManager->flush();
             }
 
-
             return $this->render('profili_modifikim.html.twig', [
                 'form' => $form->createView(),
                 'logoUrl'=>$logopath,
-                'logo'=>$logo,
+                'logo'=>$profili[0]['logo'],
                 'biznesName'=>$biznesName
-
-
 
             ]);
         }
@@ -192,5 +187,51 @@ class BiznesController extends Controller
             return $this->redirectToRoute('landingpage');
         }
     }
+ /**
+     * @Route("/ndryshoPassword/{id}", name="ndryshoPassword")
+     */
+    public function ndryshoPassword(Request $request,EntityManagerInterface $entityManager,Biznes $biznes)
+    {
+        if(($this->get('session')->get('loginUserId') != null) ){
 
+            $biznesId=$this->get('session')->get('loginUserId');
+            
+            
+            $logoSession=  $this->get('session')->get('logoPath');
+
+            $Query="SELECT emer_biznesi,logo
+                    From biznes
+                    Where biznes.id=:biznesID ";
+            $statement = $entityManager->getConnection()->prepare($Query);
+            $statement->execute(array('biznesID'=>$biznesId));
+            $profili = $statement->fetchAll();
+            $biznesName= $profili[0]["emer_biznesi"];
+            $logopath="/uploads/logo/".$profili[0]['logo'];
+
+            
+            $form = $this->createForm(NdryshoPasswordType::class, $biznes);
+            $form->handleRequest($request);
+           
+            if($form->isSubmitted() && $form->isValid()) {
+              
+               
+                $entityManager = $this->getDoctrine()->getManager();
+                $biznes->setPassword($form->getData()->getPassword());
+            
+                $entityManager->persist($biznes);
+                $entityManager->flush();
+            }
+
+
+            return $this->render('ndrysho_password.html.twig', [
+                'form' => $form->createView(),
+                'logoUrl'=>$logopath,
+                // 'logo'=>$logo,
+                'biznesName'=>$biznesName
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('landingpage');
+        }
+    }
 }

@@ -66,12 +66,16 @@
                         </a>
                         <span style="float:right;    padding-top: 7%;">|</span>
                     </td>
+                    {%if tender.biznes_id != biznesId%}
                     <td>
                         <a href="{{ path('oferto',{'id':tender.id }) }}">
                             <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
                         </a>
 
                     </td>
+                    {% else %}
+                    <td>-</td>
+                    {%endif%}
                 </tr>
             {% endfor %}
             </tbody>
