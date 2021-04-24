@@ -1,8 +1,15 @@
 {% extends 'home.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block header %}
+    <h3 class="page-title">Tender i ri</h3>
+{% endblock %}
 {% block bodymain %}
 
-{{ form_start(form) }}
+
+
+    <div class=" panel modifiko detaje d-flex justify-content-center">
+
+    {{ form_start(form) }}
     {{ form_widget(form) }}
 
 
@@ -10,6 +17,7 @@
         {{ button_label|default('Ruaj') }}
     </button>
 {{ form_end(form) }}
+    </div>
 
 <script>
     var header = document.getElementById("krijoTender");
