@@ -1,16 +1,16 @@
-
+{{ include('NavBarLogin.twig') }}
 {{ include ('styleandjs.html.twig') }}
 
-<div id="wrapper" style="height:1.1vh">
+<div id="wrapper" style="height:100%">
     <div class="vertical-align-wrap">
         <div class="vertical-align-middle">
             <div class="auth-box " style="margin-bottom: 3%">
                 <div class="left">
                     <div class="content">
                         <div class="header">
-                            <div class="logo text-center">
-                                <a href="{{  path('landingpage')}}"><img src="assets/img/Logo.png" alt="Logo" width="120px">
-                                </a></div>
+                            {#                            <div class="logo text-center">#}
+                            {#                                <a href="{{  path('landingpage')}}"><img src="assets/img/Logo.png" alt="Logo" width="120px">#}
+                            {#                                </a></div>#}
                             <p class="lead">Identifikohuni në sistem</p>
                         </div>
                         {% for msg in app.flashes('error') %}
@@ -19,40 +19,43 @@
                             </div>
                         {% endfor %}
                         {{ form_start(form) }}
-                            <div class="input-group">
+                        <div class="input-group">
 
-                                <label for="signin-email" class="control-label sr-only">NIPT</label>
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'5'}})}}
-                          
-                            </div>
-                    <br>
-                            <div class="input-group">
-                                <label for="signin-password" class="control-label sr-only">Password</label>
-                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                {{form_widget(form.password,{'attr': {'class': 'form-control','placeholder':'password'}})}}
+                            <label for="signin-email" class="control-label sr-only">NIPT</label>
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'5'}})}}
 
-                            </div>
+                        </div>
                         <br>
-                            {{ form_row(form.submit,{'attr': {'class': 'btn btn-primary btn-lg btn-block',
-                                'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
-                        {{ form_end(form) }}
-                            <div class="bottom">
-                              <p class="lead">  <span class="helper-text"><i class="fa fa-lock"></i> <a href="#" style="color:#FFC107">Keni harruar fjalekalimin?</a></span></p>
-                            </div><br>
-                            <div  class="d-flex justify-content-center">
+                        <div class="input-group">
+                            <label for="signin-password" class="control-label sr-only">Password</label>
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            {{form_widget(form.password,{'attr': {'class': 'form-control','placeholder':'password'}})}}
 
-                                <p class="lead"> <i class="fa fa-user-plus"></i>  <a href="{{ path('regjistohu') }}" style="color:#FFC107"> Regjistrohuni  ne Sistem</a></p>
-                            </div>
+                        </div>
+                        <br>
+                        {{ form_row(form.submit,{'attr': {'class': 'btn btn-primary btn-lg btn-block',
+                            'tag':'button','style':'width: 100%; padding-left:0px;background-color:#FFC107'}})}}
+                        {{ form_end(form) }}
+                        <div class="bottom">
+                            <p class="lead">  <span class="helper-text">
+                                      <i class="fa fa-lock"></i>
+                                      <a href="#" style="color:#FFC107">Keni harruar fjalekalimin?</a></span></p>
+                        </div><br>
+                        <div  class="d-flex justify-content-center">
+                            <p class="lead"> <i class="fa fa-user-plus"></i>
+                                <a href="{{ path('regjistohu') }}" style="color:#FFC107"> Regjistrohuni  ne Sistem</a>
+                            </p>
+                        </div>
 
                     </div>
                 </div>
                 <div class="right " >
-                    
-                        <iframe width="99%" height="100%" src="https://www.youtube.com/embed/fkGCLIQx1MI" title="YouTube video player" frameborder="0" allow="autoplay; picture-in-picture" allowfullscreen></iframe>
-                   
+
+                    <iframe width="99%" height="100%" src="https://www.youtube.com/embed/fkGCLIQx1MI" title="YouTube video player" frameborder="0" allow="autoplay; picture-in-picture" allowfullscreen></iframe>
+
                 </div>
-              
+
             </div>
 
         </div>
@@ -74,7 +77,7 @@
             // console.log(document.getElementById("username_id").value);
             // alert('Valid NIPT number');
         }
-           else
+        else
         {
             // alert('Invalid NIPT number');
         }
