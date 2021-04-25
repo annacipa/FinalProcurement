@@ -4,8 +4,8 @@
 <div class="main-content " style="background-color: #F3F5F8;margin-top:60px" >
     <div class="container-fluid  " id="viewFull">
         <div class="row" >
-            <div class="col-lg-10 col-lg-offset-1">
 
+            <div class="col-lg-10 col-lg-offset-1">
                 <div class="panel" style="padding: 0px !important; ">
                     <div class="panel-body   "  id="Register">
                         <div class="col-lg-5  col-md-5 " style="padding: 0px!important;">
@@ -22,13 +22,15 @@
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner" role="listbox">
                                         <div class="item active">
-                                            <div class="carousel-item" style="background-image: url('images/sliderLogSign1.jpg')">
+                                            <div class="carousel-item" style="background-image: url({{ asset('/images/Slider2.jpg') }})">
+
                                             </div>
                                         </div>
 
                                         <div class="item">
-                                            <div class="carousel-item" style="background-image: url('images/sliderLogSign2.jpg')">
+                                            <div class="carousel-item" style="background-image: url({{ asset('/images/Slider1.jpg') }})">
 
+{#                                                <img src="{{ asset('/images/Slider1.jpg') }}">#}
                                             </div>
                                         </div>
 
@@ -46,11 +48,7 @@
                         <div class="col-lg-7 col-md-7 " style="padding-right:40px;padding-left:40px">
                             <div class="content   registerForm ">
                                 <div class="row "  style="padding-top:10px !important;">
-{#                                    <div class="header col-lg-4"  style="float:right">#}
-{#                                        <div class="logo text-center">#}
-{#                                            <a href="{{ path('landingpage') }}" ><img src="assets/img/Logo.png"  alt=" Logo" width="120px"></a>#}
-{#                                        </div>#}
-{#                                    </div>#}
+
                                     <div  class="RegisterHeading col-lg-6">
                                         <h3 >Rregjistrohu
                                         </h3>
@@ -153,8 +151,8 @@
 <style>
     #myCarousel{
         height: 95vh;
-        max-height: 95px;
-        min-height: 95vh;
+        /*max-height: 95px;*/
+        min-height: 93vh;
 
     }
     hr{
@@ -165,9 +163,9 @@
         height:35px;
     }
     .carousel-item {
-        height: 1.1vh;
-        max-height: 95px;
-        min-height: 95vh;
+        height: 0.9vh;
+
+        min-height: 93vh;
         background: no-repeat center center scroll;
         -webkit-background-size: cover;
         -moz-background-size: cover;

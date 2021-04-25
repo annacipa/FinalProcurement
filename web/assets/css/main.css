@@ -173,8 +173,10 @@ html.fullscreen-bg #wrapper {
     background-color: #f8f8f8; }
   .navbar-default .brand {
     float: left;
-    padding: 30px 39px;
-    background-color: #fff; }
+    /*padding: 30px 39px;*/
+    background-color: #fff;
+
+  }
   @media screen and (max-width: 1024px) {
     .navbar-default .brand {
       padding-left: 30px;
@@ -242,7 +244,8 @@ html.fullscreen-bg #wrapper {
     right: 16px; }
 
 .navbar-nav > li > a {
-  padding: 28px 20px; }
+  /*padding: 28px 20px;*/
+}
   .navbar-nav > li > a > i {
     font-size: 22px;
     margin-right: 2px;
@@ -975,17 +978,17 @@ ul.activity-list > li {
  * AUTHENTICATION FORMS, PAGE
  ********************************/
 .auth-box {
-  -moz-box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  /*-moz-box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);*/
+  /*-webkit-box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);*/
+  /*box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.1);*/
+  /*-webkit-border-radius: 5px;*/
+  /*-moz-border-radius: 5px;*/
+  /*border-radius: 5px;*/
   width: 80%;
-  height: 90%;
+  height: 400px;
   margin: 0 auto;
-  background-color: #fff;
-/*margin-top:10%*/
+  /*background-color: #fff;*/
+margin-top:5%
 
 }
   .auth-box:before {
@@ -1035,7 +1038,9 @@ ul.activity-list > li {
     width: 42%;
     height: 100%;
     padding: 0 30px;
-    text-align: center; }
+    text-align: center;
+    background-color: #fff;
+  }
     .auth-box .left:before {
       display: inline-block;
       vertical-align: middle;
@@ -1091,7 +1096,7 @@ margin-left:-2%
 
   .auth-box .right {
     float: right;
-    width: 58%;
+    width: 48%;
     height: 100%;
     position: relative;
     /*margin-top: 150px;*/
