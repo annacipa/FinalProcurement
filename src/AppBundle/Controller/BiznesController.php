@@ -89,6 +89,7 @@ class BiznesController extends Controller
 
             $biznesId=$this->get('session')->get('loginUserId');
             $Query="SELECT emer_biznesi ,
+                    biznes.id as idBiznesi,
                     email as email, 
                     nipt as nipt, 
                     adresa, logo, numer_telefoni, 

@@ -17,7 +17,7 @@
                 <th role="columnheader">Fusha e Operimit</th>
                 <th role="columnheader"> Detaje</th>
                 <th role="columnheader"> Apliko</th>
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
@@ -87,9 +87,9 @@
             <thead>
 
             <tr>
-                <th  role="columnheader">#</th>
-                <th role="columnheader">Titull Thirrje</th>
-                <th role="columnheader">Veprime</th>
+                <th colspan="1" role="columnheader">#</th>
+                <th colspan="4" role="columnheader">Titull Thirrje</th>
+                <th colspan="5" role="columnheader">Veprime</th>
 
             </tr>
 
@@ -103,22 +103,22 @@
 {#                        <b>#</b>#}
                         <br>
                         {{ tender.id }}
-                        <span>|</span>
+                        <span class="separator">|</span>
                         </td>
                     <td colspan="4"  style="width: 50%">
-                        <b>Titull Thirrje</b> <br>
+{#                        <b>Titull Thirrje</b> <br>#}
                         {{ tender.titull_thirrje }}
                        
-                        <span>|</span>
+                        <span class="separator">|</span>
                     </td>
 
                     <td colspan="5"  style="width: 30%">
-                        <b>Shiko</b><br>
+{#                        <b>Shiko</b><br>#}
                         <a href="{{ path('tender_shiko',{'id':tender.id}) }}" >
                             <button type="button" class="btn btn-warning"><i class="fa fa-info-circle"></i> </button>
                         </a><br>
 
-                        <b>Oferto</b><br>
+{#                        <b>Oferto</b><br>#}
                         <a href="{{ path('oferto',{'id':tender.id }) }}">
                             <button type="button" class="btn btn-success"><i class="lnr lnr-select"></i> </button>
                         </a>
@@ -184,6 +184,10 @@
 
         header=header.classList.add('active');
     </script>
-
+<style>
+    .separator{
+        float:right;
+    }
+</style>
 
 {% endblock %}
