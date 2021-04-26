@@ -45,6 +45,51 @@
         border-radius: 66px;
 
     }
+    .socialIcons{
+        width:30%;
+        float: left;
+
+    }
+    nav li{
+        text-transform: uppercase!important;
+    }
+    .mobile-nav-active .mobile-nav {
+        opacity: 1;
+        visibility: visible;
+        width: 47%;
+    }
+    .mobile-nav {
+        /* position: fixed; */
+        /* top: 55px; */
+        /* right: 61px; */
+        /* bottom: 15px; */
+        /* left: 15px; */
+        /* z-index: 9999; */
+        /* overflow-y: auto; */
+        /* background: #fff; */
+        /* transition: ease-in-out 0.2s; */
+        /* opacity: 0; */
+        /* visibility: hidden; */
+        /* border-radius: 10px; */
+        /* padding: 10px 0; */
+        position: fixed;
+        top: 64px;
+        right: -113%;
+        bottom: 15px;
+        left: 15px;
+        z-index: 9999;
+        overflow-y: auto;
+        background: #fff;
+        /* transition: ease-in-out 0.2s; */
+        opacity: 0;
+        visibility: hidden;
+        border-radius: 10px;
+        padding: 10px 0;
+        left: 56%;
+        animation: 0.4s slide-right;
+        height: 100%;
+        text-align: center;
+    }
 </style>
 
 </head>
@@ -74,9 +119,9 @@
                 <li><a href="{{ path('identifikohu') }}">Identifikohu</a></li>
                 <li><a href="{{ path('regjistohu') }}">Regjistrohu</a></li>
 
-                <li><a> <i class="icofont-facebook" style="color:#f4a950"></i></a></li>
-                <li><a> <i class="icofont-instagram" style="color:#f4a950"></i></a></li>
-                <li><a><i class="icofont-linkedin" style="color:#f4a950"></i></a></li>
+                <li class="socialIcons"><a> <i class="icofont-facebook" style="color:#f4a950"></i></a></li>
+                <li class="socialIcons"><a> <i class="icofont-instagram" style="color:#f4a950"></i></a></li>
+                <li class="socialIcons"><a><i class="icofont-linkedin" style="color:#f4a950"></i></a></li>
             </ul>
         </nav><!-- .nav-menu -->
     </div>
