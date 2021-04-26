@@ -22,9 +22,12 @@
                             <label for="signin-email" class="control-label sr-only">NIPT</label>
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'10'}})}}
-                            <div class="alert alert-danger" id="nipt_gabim">
-                            NIPT duhet të jetë në formatin A00000000A
-                            </div>    
+
+                        </div>
+                        <div class="error-message" id="nipt_gabim"  >
+                            <span class="label label-danger" style="font-size: 14px !important;">
+                                NIPT duhet të jetë në formatin A00000000A
+                            </span>
                         </div>
                         <br>
                         <div class="input-group">
