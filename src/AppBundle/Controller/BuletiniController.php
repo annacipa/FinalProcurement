@@ -24,26 +24,20 @@ class BuletiniController extends controller
     public function feedBuletin(EntityManagerInterface $entityManager){
       if (( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 ))
       {
-          $logopath=$this->get('session')->get('logoPath');
-           $logopath="/uploads/logo/".$logopath;
-
-
-
-        $today=new \DateTime();
-        $repository=$entityManager->getRepository(Tender::class);
-//        add kush qe not in this business
-
-          $Query="SELECT emer_biznesi,biznes.id
+          
+          $today=new \DateTime();
+          $repository=$entityManager->getRepository(Tender::class);
+          $biznesId=$this->get('session')->get('loginUserId');
+          $Query="SELECT emer_biznesi, logo
                     From biznes
                     Where biznes.id=:biznesID ";
           $statement = $entityManager->getConnection()->prepare($Query);
-          $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+          $statement->execute(array('biznesID'=>$biznesId));
           $profili = $statement->fetchAll();
-//          dump($profili[0]["id"]);die();
-          $biznesName= $profili[0]["emer_biznesi"];
-          $biznesId=$profili[0]["id"];
 
-        $query="SELECT tender.id, tender.titull_thirrje, tender.pershkrim,
+          $biznesName= $profili[0]["emer_biznesi"];
+          $logopath="/uploads/logo/".$profili[0]['logo'];
+          $query="SELECT tender.id, tender.titull_thirrje, tender.pershkrim,
                tender.fond_limit, tender.data_perfundimit, tender.biznes_id,
                fusha_operimi.emer_fushe_operimi, biznes.emer_biznesi 
               FROM tender

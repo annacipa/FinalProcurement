@@ -21,7 +21,7 @@
                             <span id="BiznesName">{{ biznesName }}</span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ path('profili')}}"><i class="lnr lnr-user"></i> <span>Profili im</span></a></li>
-
+                            <li><a href="{{ path('ndryshoPassword', {'id': biznesId}) }}"><i class="lnr lnr-lock" aria-hidden="true"></i>Ndrysho Fjalëkalimin</a> </li>
                             <li><a href="{{ path('logout')}}"><i class="lnr lnr-exit"></i> <span>Dil</span></a></li>
                         </ul>
                     </li>

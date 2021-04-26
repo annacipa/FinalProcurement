@@ -28,28 +28,17 @@ class DefaultController extends Controller
           
             if ($biznes instanceof Biznes){
                 $this->get('session')->set('loginUserId', $biznes->getId());
-                $this->get('session')->set('logoPath',$biznes->getLogo());
-
                 $biznesId=$this->get('session')->get('loginUserId');
-                $role =  new Role();
-                $repositoryRole = $this->getDoctrine()->getRepository(Role::class);
-                $roleName = $repositoryRole->find($biznes->getRoleId());
-                if($roleName instanceof Role){
-                    $emerRoli = $roleName->getEmerRoli();
-                    $this->get('session')->set('roleName',$emerRoli);
-                    $this->get('session')->set('roleId',$roleName->getId());
-
-                }
             return $this->redirectToRoute('buletini');
             }
             else{
                 $this->addFlash('error', 'Keni vendosur fjalekalimin ose NIPT gabim! Ju lutem provojeni sërish!!');
                 return $this->redirectToRoute('identifikohu');
-//             return $this->redirectToRoute('landingpage');
+
             }
         }
         return $this->render('login.html.twig', [
-          "form"=>$form->createView()
+          "form"=>$form->createView(),
 
         ]);
     }

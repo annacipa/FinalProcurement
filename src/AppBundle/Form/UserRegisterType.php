@@ -25,20 +25,12 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('emer_biznesi',TextType::class)
-            // ->add('role_id', EntityType::class, [
-            //     'class' => 'AppBundle:Role',
-            //     'query_builder' => function (EntityRepository $er) {
-            //         return $er->createQueryBuilder('r')
-            //                 ->where('r.id != :id')
-            //                 ->setParameter('id', 4);
-            //     },
-            //     'choice_label' => 'emer_roli',
-            // ])
+        
             ->add('nipt',TextType::class)
             ->add('email', EmailType::class)
             ->add('adresa',TextType::class)
             ->add('logo', FileType::class, [
-//                'label' => 'Logo (JPEG)',
+
                 'required' => false,
                 'constraints' => [
                     new File([

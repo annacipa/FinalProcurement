@@ -26,8 +26,7 @@ class TenderController extends Controller
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
 
             $biznesId = $this->get('session')->get('loginUserId');
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
+         
 
             $statusDraft = "draft";
             $today = new \DateTime();
@@ -42,7 +41,7 @@ class TenderController extends Controller
                 ->andWhere('q.isDeleted=0')
                 ->getQuery()
                 ->getResult();
-//dump($tenderAll);die();
+
 
             foreach ($tenderAll as $tender) {
                 $tender->setEmerStatusi("inaktiv");
@@ -74,14 +73,14 @@ class TenderController extends Controller
 
             $statement->execute(array('biznesId' => $biznesId));
             $tendersAktiv = $statement->fetchAll();
-            $Query="SELECT emer_biznesi 
+            $Query="SELECT emer_biznesi, logo 
                     From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
             $statement->execute(array('biznesID'=>$biznesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
+            $logopath = $profili[0]['logo'];
 
 //       $tendersAktiv=$repository->createQueryBuilder('q')
 ////            ->andWhere('q.biznesId=:val')
@@ -91,7 +90,7 @@ class TenderController extends Controller
 //            ->andWhere('q.isDeleted=0')
 //            ->getQuery()
 //            ->getResult();
-////        dump($tendersAktiv);die();
+
 
             $tenderInaktivvQuery = "SELECT tender.id as id,
                 COUNT(oferta.id) as nrAplikimesh,
@@ -128,8 +127,8 @@ class TenderController extends Controller
             'tendersAktiv' => $tendersAktiv,
             'tendersDraft' => $tenderDraft,
             'tenderInaktiv' => $tenderInaktiv,
-            'logoUrl'=>$logopath
-            ,
+            'logoUrl'=>$logopath,
+            'biznesId' => $biznesId,
             'biznesName'=>$biznesName
         ]);
     }
@@ -140,19 +139,18 @@ class TenderController extends Controller
     public function tenderKrijo(Request $request)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
-
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
+            $biznesId = $this->get('session')->get('loginUserId');
             $entityManager=  $this->getDoctrine()->getManager();
-            $Query="SELECT emer_biznesi 
+            $Query="SELECT emer_biznesi, logo
                 From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
-            $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+            $statement->execute(array('biznesID'=>$biznesId));
 
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
+            $logopath = $profili[0]['logo'];
+            $logopath="/uploads/logo/".$logopath;
             $tender = new Tender();
             $dokument = new Dokumenta();
             $form = $this->createForm(TenderType::class);
@@ -198,7 +196,6 @@ class TenderController extends Controller
                     $dokument->setIsDeleted(0);
 
                     $dokument->setCreatedBy($this->get('session')->get('loginUserId'));
-//                    dump($dokument);
                     $entityManager->persist($dokument);
                     $entityManager->flush();
 
@@ -207,7 +204,7 @@ class TenderController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Your changes were saved!'
+                    'Ndryshimet u ruajten me sukses!'
                 );
                 return $this->redirectToRoute('tender_view');
             }
@@ -217,8 +214,8 @@ class TenderController extends Controller
         }
         return $this->render('tender/index.html.twig', [
             'form' => $form->createView(),
-            'logoUrl'=>$logopath
-            ,
+            'logoUrl'=>$logopath,
+            'biznesId' => $biznesId,
             'biznesName'=>$biznesName
         ]);
 
@@ -231,25 +228,24 @@ class TenderController extends Controller
     public function shikoDetajet(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if(( $this->get('session')->get('loginUserId') != null ) && ( $this->get('session')->get('roleId') != 4 )){
-
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
+            $tenderId = $request->get('id');
 
             $dokumenta = new Dokumenta();
             $repository = $entityManager->getRepository(FushaOperimi::class);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
-            $Query="SELECT emer_biznesi 
+            $Query="SELECT emer_biznesi,logo
             From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
             $statement->execute(array('biznesID'=>$businesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
+            $logopath = $profili[0]['logo'];
+            $logopath="/uploads/logo/".$logopath;
             $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
                 ->andWhere('dok.tenderId=:idTender')
-                ->setParameter('idTender', $tender->getId())
+                ->setParameter('idTender', $tenderId)
                 ->getQuery()
                 ->getResult();
 
@@ -270,7 +266,8 @@ class TenderController extends Controller
             'fusheOperimi' => $fusheOperimi,
             'dokumenta' => $dokumenta,
             'logoUrl'=>$logopath,
-            'biznesName'=>$biznesName
+            'biznesName'=>$biznesName,
+            'biznesId' => $this->get('session')->get('loginUserId'),
 
 
         ]);
@@ -283,20 +280,17 @@ class TenderController extends Controller
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
 
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
-
             $form = $this->createForm(TenderType::class, $tender);
             $repositoryDokumenta = $entityManager->getRepository(Dokumenta::class);
             $businesId = $this->get('session')->get('loginUserId');
-            $Query="SELECT emer_biznesi 
+            $Query="SELECT emer_biznesi, logo
             From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
             $statement->execute(array('biznesID'=>$businesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
+            $logopath="/uploads/logo/".$profili[0]["logo"];
             $dokumenta = $repositoryDokumenta->createQueryBuilder('dok')
                 ->andWhere('dok.tenderId=:idTender')
                 ->setParameter('idTender', $tender->getId())
@@ -335,7 +329,7 @@ class TenderController extends Controller
                     $dokument->setIsDeleted(0);
 
                     $dokument->setCreatedBy($this->get('session')->get('loginUserId'));
-                    /*dump($dokument);*/
+              
                     $entityManager->persist($dokument);
                     $entityManager->flush();
 
@@ -351,8 +345,8 @@ class TenderController extends Controller
             'tender' => $tender,
             'form' => $form->createView(),
             'dokumenta' => $dokumenta,
-            'logoUrl'=>$logopath
-            ,
+            'logoUrl'=>$logopath,
+            'biznesId' => $businesId,
             'biznesName'=>$biznesName
         ]);
     }
@@ -364,18 +358,12 @@ class TenderController extends Controller
     public function publiko(Request $request, Tender $tender)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
+     
 
 //        Beje Aktive
             $tender->setDataFillimit(new \DateTime());
             $tender->setEmerStatusi('aktiv');
             $this->getDoctrine()->getManager()->flush();
-
-//            $this->addFlash(
-//                'success',
-//                'Ju keni publikuar:'.$tender->getTitullThirrje().'!'
-//            );
             return $this->redirectToRoute('tender_view');
         }
         else{
@@ -391,16 +379,17 @@ class TenderController extends Controller
     public function modifikoAktiv(Request $request, Tender $tender)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
-            $Query="SELECT emer_biznesi 
+
+            $businesId = $this->get('session')->get('loginUserId');
+            $Query="SELECT emer_biznesi, logo
             From biznes
                     Where biznes.id=:biznesID ";
             $entityManager= $this->getDoctrine()->getManager();
             $statement = $entityManager->getConnection()->prepare($Query);
-            $statement->execute(array('biznesID'=>$this->get('session')->get('loginUserId')));
+            $statement->execute(array('biznesID'=>$businesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
+            $logopath="/uploads/logo/".$profili[0]['logo'];
 
 
             $form = $this->createForm(  TenderAktivType::class);
@@ -417,9 +406,11 @@ class TenderController extends Controller
 
         return $this->render('tender/modifikoaktiv.html.twig', [
             'tender' => $tender,
-            'form' => $form->createView(),'logoUrl'=>$logopath,
+            'form' => $form->createView(),
+            'logoUrl'=>$logopath,
+            'biznesId' => $businesId,
             'biznesName'=>$biznesName
-//
+
         ]);
 
     }
@@ -469,34 +460,20 @@ class TenderController extends Controller
     public function OfertatTenderAktiv(Request $request, Tender $tender, EntityManagerInterface $entityManager)
     {
         if( ($this->get('session')->get('loginUserId') != null ) && ($this->get('session')->get('roleId') != 4) ){
-
-            $logopath=$this->get('session')->get('logoPath');
-            $logopath="/uploads/logo/".$logopath;
-            $ofertatQuery="SELECT oferta.id as 'OfertaId',
-                     oferta.pershkrimi as 'OfertaPershkrim', 
-                     oferta.vlefta, 
-                     oferta.adresa_dorezimit, 
-                     oferta.vendimi,
-                     tender.id as 'tenderId', 
-                     tender.pershkrim, 
-                     biznes.id as 'biznesId', 
-                     biznes.emer_biznesi, 
-                     biznes.email, 
-                     biznes.adresa, 
-                     biznes.nipt 
-                     From oferta Inner join tender on oferta.tender_id=tender.id 
+            $businesId = $this->get('session')->get('loginUserId');
+            $ofertatQuery="SELECT oferta.id as 'OfertaId', oferta.pershkrimi as 'OfertaPershkrim', oferta.vlefta, 
+                oferta.adresa_dorezimit, oferta.vendimi, tender.id as 'tenderId', tender.pershkrim, biznes.id as 'biznesId', biznes.emer_biznesi, biznes.email, biznes.adresa, biznes.nipt 
+                     From oferta 
+                     Inner join tender on oferta.tender_id=tender.id 
                      inner join biznes on oferta.created_by=biznes.id
-                     WHERE oferta.tender_id=:tenderId
-                     AND oferta.is_deleted=0
-                     And tender.is_deleted=0
-                    ";
+                     WHERE oferta.tender_id=:tenderId AND oferta.is_deleted=0 And tender.is_deleted=0";
 
             $statement = $entityManager->getConnection()->prepare($ofertatQuery);
 
             $statement->execute(array('tenderId' => $tender->getId()));
             $ofertat = $statement->fetchAll();
 
-            $Query="SELECT emer_biznesi 
+            $Query="SELECT emer_biznesi, logo
             From biznes
                     Where biznes.id=:biznesID ";
             $statement = $entityManager->getConnection()->prepare($Query);
@@ -504,8 +481,7 @@ class TenderController extends Controller
 
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-
-
+            $logopath="/uploads/logo/".$profili[0]['logo'];
             $repository = $entityManager->getRepository(FushaOperimi::class);
             $fusheOperimi = $repository->createQueryBuilder('fop')
                 ->andWhere('fop.id=:fusheOperimiTender')
@@ -523,12 +499,12 @@ class TenderController extends Controller
             'tender'=>$tender,
             'fusheOperimi'=>$fusheOperimi,
             'logoUrl'=>$logopath,
-            'biznesName'=>$biznesName
+            'biznesName'=>$biznesName,
+            'biznesId'=> $businesId
 
 
         ]);
 
-//                return $this->redirectToRoute('tender_view');
 
 
     }
@@ -555,10 +531,10 @@ class TenderController extends Controller
     {
         $idOferteFituese = $request->get('id');
         $idTender=$request->get('idTender');
-//        dump($idTender);die();
+
 
         $ofertaFituese = $entityManager->getRepository(Oferta::class)->find($idOferteFituese);
-//        dump($ofertaFituese);die();
+
         $ofertaFituese->setVendimi('fitues');
         $entityManager->persist($ofertaFituese);
         $entityManager->flush();
@@ -567,7 +543,6 @@ class TenderController extends Controller
         $statement = $entityManager->getConnection()->prepare($updateSql);
 
         $statement->execute(array('idTender' =>$idTender,'ofertaId'=>$idOferteFituese));
-//        $ofertat = $statement->fetchAll();
 
 
 

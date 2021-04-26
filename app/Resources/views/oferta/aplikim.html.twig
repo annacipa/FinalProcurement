@@ -41,17 +41,11 @@
     <div class="panel panel-headline detaje modifiko">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-
-
-    {#    <button class="btn">#}
-
-
-    {#        <a href="{{ path('tender_publiko_draft', {'id':) }}">Publiko</a>#}
-    {#    </button>#}
-
+        {% if biznesId != tender.biznesId %}
     <button type="submit" class="btn btn-primary">
         {{ button_label|default('Apliko') }}
     </button>
+        {% endif %}
     {{ form_end(form) }}
 
     </div>

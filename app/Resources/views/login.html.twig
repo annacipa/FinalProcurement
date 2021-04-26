@@ -8,9 +8,7 @@
                 <div class="left">
                     <div class="content">
                         <div class="header">
-                            {#                            <div class="logo text-center">#}
-                            {#                                <a href="{{  path('landingpage')}}"><img src="assets/img/Logo.png" alt="Logo" width="120px">#}
-                            {#                                </a></div>#}
+
                             <p class="lead">Identifikohuni në sistem</p>
                         </div>
                         {% for msg in app.flashes('error') %}
@@ -23,7 +21,7 @@
 
                             <label for="signin-email" class="control-label sr-only">NIPT</label>
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'5'}})}}
+                            {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'10'}})}}
 
                         </div>
                         <br>
@@ -65,22 +63,29 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function()
-    {
-        var regex = /^[A-Za-z]+$/;
+    $(document).ready(function() {
+        $('#login_admin_username').keyup(function(){
+           var nipt =  $("#login_admin_username").val();
+            var pattern = /^\b[A-Z]+@[0-9]+\.[A-Z]{1,8,1}\b$/i
+           // alert(nipt)
+        });
+        // $('#username_id').on('ke')
+        // var regex = /^[A-Za-z]+$/;
+        // var userinput = $(this).val();
 
-        // document.getElementsByClassName("btn").onclick=function () {
-
-
-        if(regex.test(document.getElementById("login_admin_username").value)) {
-            document.getElementById("demo").innerHTML = "Paragraph changed!";
-            // console.log(document.getElementById("username_id").value);
-            // alert('Valid NIPT number');
-        }
-        else
-        {
-            // alert('Invalid NIPT number');
-        }
-
+        //
+        // if(!pattern.test(userinput))
+        // {
+        //     alert('not a valid e-mail address');
+        // }​
+        //
+        //
+        // if (regex.test(document.getElementById("login_admin_username").value)) {
+        //     document.getElementById("demo").innerHTML = "Paragraph changed!";
+        //
+        // } else {
+        //
+        // }
+    })
 
 </script>
