@@ -77,6 +77,12 @@
                                             <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
                                         </div>
                                     </div>
+                                    <div class="error-message" id="nipt_gabim"  >
+                                        <span class="label label-danger" style="font-size: 14px !important;">
+                                            NIPT duhet të jetë në formatin A00000000A
+                                        </span>
+                                    </div>
+                                    <br>
                                 </div>
                                 <div class="row">
                                     <div class="form-group  col-md-6 ">
@@ -85,6 +91,12 @@
                                             <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                                         </div>
                                     </div>
+                                    <div class="error-message" id="email_gabim"  >
+                                        <span class="label label-danger" style="font-size: 14px !important;">
+                                            email duhet të përmbajë @
+                                        </span>
+                                    </div>
+                                    <br>
                                     <div class="form-group col-md-6">
                                         <div class="input-group">
                                             {{ form_row(form.numerTelefoni,{'attr': {'class': 'form-control','placeholder':'Numer telefoni'}}) }}
@@ -183,4 +195,39 @@
     }
 
 </style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#nipt_gabim").hide();
+        $("#email_gabim").hide();
+        $('#user_register_nipt').focusout(function(){
 
+            var patternNipt = /^[A-Z][0-9]{8}[A-Z]$/;
+            var patternEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            nipt = $('#user_register_nipt').val();
+            email = $("#user_register_email").val();
+            if(!patternNipt.test(nipt) || !patternEmail.test(email))
+            {
+                $("#user_register_submit").attr("disabled", true)
+                $("#nipt_gabim").show();
+            }
+            else{
+                $("#user_register_submit").attr("disabled", false)
+                $("#nipt_gabim").hide();
+            }
+        })
+        $("#user_register_email").focusout(function(){
+            var patternEmail = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+            email = $("#user_register_email").val();
+            if(!patternEmail.test(email))
+            {
+                $("#user_register_submit").attr("disabled", true)
+                $("#email_gabim").show();
+            }
+            else{
+                $("#user_register_submit").attr("disabled", false)
+                $("#email_gabim").hide();
+            }
+        })
+    
+});
+</script>
