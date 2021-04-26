@@ -9,7 +9,7 @@
                 <div class="panel" style="padding: 0px !important; " id="registerForm">
                     <div class="panel-body   "  id="Register">
                         <div class="col-lg-5  col-md-5 " style="padding: 0px!important;">
-                            <div class="  imageRegister p-4 ">
+                            <div class="  imageRegister">
 
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 80vh">
                                     <!-- Indicators -->
@@ -45,7 +45,7 @@
                             </div>
                             {#                            </div>#}
                         </div>
-                        <div class="col-lg-7 col-md-7 " style="padding-right:40px;padding-left:40px">
+                        <div class="col-lg-7 col-md-7 " style="padding-right:40px;padding-left:40px;padding-bottom: 40px;">
                             <div class="content   registerForm ">
                                 <div class="row "  style="padding-top:10px !important;">
 
@@ -165,14 +165,14 @@
 ​
 <style>
     #myCarousel{
-        height: 82vh;
+        height: 83vh;
         /*max-height: 95px;*/
-        min-height: 82vh;
+        min-height: 83vh;
 
     }
     @media screen and (min-width: 992px) {
     #registerForm{
-        height:85vh;
+        height:83vh;
     }
     }
 
@@ -186,7 +186,7 @@
     .carousel-item {
         height: 0.6vh;
 
-        min-height: 82vh;
+        min-height: 83vh;
         background: no-repeat center center scroll;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -222,6 +222,7 @@
             else{
                 $("#user_register_submit").attr("disabled", false)
                 $("#nipt_gabim").hide();
+
             }
         })
         $("#user_register_email").focusout(function(){
@@ -231,10 +232,12 @@
             {
                 $("#user_register_submit").attr("disabled", true)
                 $("#email_gabim").show();
+
             }
             else{
                 $("#user_register_submit").attr("disabled", false)
                 $("#email_gabim").hide();
+
             }
         })
     

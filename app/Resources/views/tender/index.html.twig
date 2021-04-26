@@ -10,9 +10,7 @@
     <div class=" panel modifiko detaje d-flex justify-content-center">
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-
-
+        {{ form_widget(form) }}
     <button type="submit" class="btn btn-primary">
         {{ button_label|default('Publiko') }}
     </button>
@@ -21,8 +19,9 @@
     </div>
 
 
+    <script src="{{asset('bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
 
-<script>
+    <script>
     var header = document.getElementById("krijoTender");
     header=header.classList.add('active');
 </script>

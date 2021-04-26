@@ -80,7 +80,7 @@ class TenderController extends Controller
             $statement->execute(array('biznesID'=>$biznesId));
             $profili = $statement->fetchAll();
             $biznesName= $profili[0]["emer_biznesi"];
-            $logopath = $profili[0]['logo'];
+            $logopath="/uploads/logo/".$profili[0]['logo'];
 
 //       $tendersAktiv=$repository->createQueryBuilder('q')
 ////            ->andWhere('q.biznesId=:val')

@@ -135,51 +135,8 @@
 
 
 
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-
-    <script>
-
-        $(document).ready( function () {
-
-            $('table.element').DataTable({
-                responsive: true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "pageLength": 20,
-                "paging": true,
-                "compact": true,
-               // "fieldSeparator":' \t',
-                language:{
-                    "sEmptyTable":     "Asnje rekord ne tabele",
-                    "sInfo":           "Duke treguar _START_ deri _END_ prej _TOTAL_ reshtave",
-                    "sInfoEmpty":      "Shfaqur  0 nga 0 rekorde",
-                    "sInfoFiltered":   "(filtruar  MAX nga rekordet totale)",
-                    "sInfoPostFix":    "",
-                    "sInfoThousands":  ".",
-                    "sLengthMenu":     "Shfaq  MENU elemente",
-                    "sLoadingRecords": "Duke u ngarkuar...",
-                    "sProcessing":     "Duke procesuar...",
-                    "sSearch":         " ",
-                    "searchPlaceholder": "Kerko",
-                    "sZeroRecords":    "0 rezultate nga kerkimi.",
-                    "oPaginate": {
-                        "sFirst":      "I pari",
-                        "sPrevious":   "<",
-                        "sNext":       ">",
-                        "sLast":       "i fundit"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": shtyp per te renditur ne rendin rrites",
-                        "sSortDescending": ": shtyp per te renditur ne rendin zbrites"
-                    }
-                },
-            });
-
-        } );
+    {{ include('DataTableJs.html.twig') }}
+<script>
         var header = document.getElementById("buletini");
 
         header=header.classList.add('active');
