@@ -22,7 +22,9 @@
                             <label for="signin-email" class="control-label sr-only">NIPT</label>
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             {{form_widget(form.username,{'attr': {'class': 'form-control','placeholder': 'NIPT', 'id':'username_id', 'minlength':'10'}})}}
-
+                            <div class="alert alert-danger" id="nipt_gabim">
+                            NIPT duhet të jetë në formatin A00000000A
+                            </div>    
                         </div>
                         <br>
                         <div class="input-group">
@@ -64,28 +66,18 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#login_admin_username').keyup(function(){
-           var nipt =  $("#login_admin_username").val();
-            var pattern = /^\b[A-Z]+@[0-9]+\.[A-Z]{1,8,1}\b$/i
-           // alert(nipt)
-        });
-        // $('#username_id').on('ke')
-        // var regex = /^[A-Za-z]+$/;
-        // var userinput = $(this).val();
+    $("#nipt_gabim").hide();
 
-        //
-        // if(!pattern.test(userinput))
-        // {
-        //     alert('not a valid e-mail address');
-        // }​
-        //
-        //
-        // if (regex.test(document.getElementById("login_admin_username").value)) {
-        //     document.getElementById("demo").innerHTML = "Paragraph changed!";
-        //
-        // } else {
-        //
-        // }
+        $('#login_admin_username').focusout(function(){
+
+          var pattern = /^[A-Z][0-9]{8}[A-Z]$/,
+    nipt = $('#login_admin_username').val();
+    if(!pattern.test(nipt))
+    {
+   
+    $("#nipt_gabim").show();
+    }
+       
     })
-
+});
 </script>
