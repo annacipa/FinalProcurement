@@ -69,18 +69,22 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-    $("#nipt_gabim").hide();
+        $("#nipt_gabim").hide();
 
         $('#login_admin_username').focusout(function(){
 
-          var pattern = /^[A-Z][0-9]{8}[A-Z]$/,
-    nipt = $('#login_admin_username').val();
-    if(!pattern.test(nipt))
-    {
-   
-    $("#nipt_gabim").show();
-    }
-       
-    })
+            var pattern = /^[A-Z][0-9]{8}[A-Z]$/,
+            nipt = $('#login_admin_username').val();
+            if(!pattern.test(nipt))
+            {
+                $("#login_admin_submit").attr("disabled", true)
+                $("#nipt_gabim").show();
+            }
+            else{
+                $("#login_admin_submit").attr("disabled", false)
+                $("#nipt_gabim").hide();
+            }
+        })
+    
 });
 </script>
